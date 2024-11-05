@@ -15,7 +15,7 @@ Start your scan by visiting the Shop Health dashboard page?
 
 ### Install Shop Health using composer
 1. `composer config repositories.wooping composer https://composer.wooping.io`
-2. `composer require wooping/shop-health`
+2. `composer require wooping/wooping-shop-health`
 
 ### WP CLI
 Shop Health also works with WP-CLI, below you'll find a few of our commands

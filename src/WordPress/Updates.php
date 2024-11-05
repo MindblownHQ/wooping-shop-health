@@ -16,7 +16,7 @@ class Updates implements Hookable {
 	/**
 	 * The url constants with which we communicate to the world outside.
 	 */
-	protected const UPDATE_URL   = 'https://updates.wooping.io/shop-health';
+	protected const UPDATE_URL   = 'https://updates.wooping.io/wooping-shop-health';
 	protected const FEEDBACK_URL = 'https://wooping.io/wp-json/wooping/v1/';
 
 	/**
