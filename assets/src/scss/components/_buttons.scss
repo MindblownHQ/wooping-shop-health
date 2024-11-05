@@ -1,0 +1,15 @@
+.wsh-button {
+	border-radius: var(--wsh-border-radius);
+	background: none;
+	cursor: pointer;
+
+	&--ghost {
+		border: 1px solid var(--wsh-black) !important;
+		color: var(--wsh-dark-grey) !important;
+
+		&:hover{
+			background: var(--wsh-black);
+			color: var(--wsh-white) !important;
+		}
+	}
+}

@@ -1,0 +1,42 @@
+.wsh-tabs {
+	&__wrapper {
+		background: var(--wsh-blue);
+		border-top-right-radius: var(--wsh-border-radius);
+		border-top-left-radius: var(--wsh-border-radius);
+	}
+
+	&__tabs {
+		display: flex;
+	}
+
+	&__tab {
+		color: var(--wsh-white);
+		padding: var(--wsh-padding);
+		text-decoration: none;
+		transition: color, background 0.2s;
+
+		&:hover,
+		&:focus,
+		&[aria-selected="true"] {
+			background: var(--wsh-white);
+			color: var(--wsh-dark-grey);
+		}
+
+		&:first-of-type {
+			border-top-left-radius: var(--wsh-border-radius);
+		}
+	}
+
+	&-pane {
+		padding: var(--wsh-padding);
+
+		&__header {
+			margin-bottom: 2rem;
+
+			&--with-controls {
+				display: grid;
+				grid-template-columns: 1fr min-content;
+			}
+		}
+	}
+}

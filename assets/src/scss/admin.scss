@@ -1,0 +1,25 @@
+@use "settings/properties";
+@use "settings/keyframes";
+
+@use "components/container";
+@use "components/tabs";
+@use "components/box";
+@use "components/scan-control";
+@use "components/stats";
+@use "components/pill";
+@use "components/widgets";
+@use "components/donut-chart";
+@use "components/form";
+@use "components/buttons";
+@use "components/tooltip";
+@use "components/mass-ignore";
+@use "components/progress-bar";
+@use "components/link-icon";
+@use "components/overview";
+@use "components/pagination";
+
+// Issue tables
+@use "components/issue-table";
+@use "components/general-issues";
+@use "components/product-issues";
+@use "components/meta-box";

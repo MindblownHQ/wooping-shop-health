@@ -1,0 +1,12 @@
+.wsh-scan-control {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	border-left: 1px solid var(--wsh-border-color);
+	padding-left: var(--wsh-padding);
+
+	&__last-scan {
+		white-space: nowrap;
+		text-wrap: nowrap !important;
+	}
+}

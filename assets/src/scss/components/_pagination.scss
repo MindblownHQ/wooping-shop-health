@@ -1,0 +1,22 @@
+.wsh-pagination {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+  margin: 2rem auto 0;
+  gap: 0.5rem;
+
+  &__item, {
+    padding: .4rem .8rem;
+    background: rgba(0, 0, 0, .05);
+    text-decoration: none;
+    color: var(--wsh-blue);
+  }
+
+  &--current,
+  a:hover {
+    background: var(--wsh-blue);
+    color: white;
+  }
+}

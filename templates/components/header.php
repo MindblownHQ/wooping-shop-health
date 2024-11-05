@@ -1,0 +1,1 @@
+<div class="wp-header-end" id="woocommerce-layout__notice-catcher"></div>

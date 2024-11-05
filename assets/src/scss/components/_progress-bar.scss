@@ -1,0 +1,40 @@
+.progress-bar--panel{
+	max-width: var(--wsh-container-max-width);
+	display: none;
+	&.in-progress{
+		display: block;
+	}
+}
+.progress-bar{
+	background: var( --wsh-grey-600 );
+	border-radius: 1rem;
+	width: 100%;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	height: 30px;
+
+	.bar{
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 30px;
+		display: block;
+		background: var(--wsh-blue);
+		width: var(--percentage);
+		border-radius: 1rem;
+	}
+
+	.percentage{
+		position: absolute;
+		left: calc( var(--percentage) - 40px );
+		color: white;
+		font-size: .8rem;
+		margin-top: 5px;
+	}
+}
+
+.progress-bar{
+	display: flex;
+	flex-flow: row wrap;
+}

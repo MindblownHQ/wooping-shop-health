@@ -1,0 +1,48 @@
+@keyframes donutfade {
+	0% {
+		opacity: .2;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* Animations for Donut Segments */
+@keyframes donutsucces {
+	0% {
+		stroke-dasharray: 0 100;
+	}
+	100% {
+		stroke-dasharray: var(--success-percentage), calc(100 - var(--success-percentage));
+	}
+}
+
+@keyframes donutwarning {
+	0% {
+		stroke-dasharray: 0 100;
+	}
+	100% {
+		stroke-dasharray: var(--warning-percentage), calc(100 - var(--warning-percentage));
+	}
+}
+
+@keyframes donuterror {
+	0% {
+		stroke-dasharray: 0 100;
+	}
+	100% {
+		stroke-dasharray: var(--error-percentage), calc(100 - var(--error-percentage));
+	}
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}

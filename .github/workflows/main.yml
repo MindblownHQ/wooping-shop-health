@@ -1,0 +1,72 @@
+name: Create release
+
+on:
+  release:
+    types:
+      - created
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: php:7.4-cli
+      options: --user root
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+      - name: Install Node.js
+        run: |
+          curl -fsSL https://deb.nodesource.com/setup_21.x | bash -
+
+      - name: Install Git & zip
+        run: apt-get update && apt-get install -y git zip nodejs
+
+      - name: Install composer dependencies
+        run: |
+          composer install -o -q --no-dev
+
+      - name: Install npm dependencies
+        run: |
+          npm install && npm run production
+
+      - name: Zip Folder
+        run: |
+          cd $GITHUB_WORKSPACE/../ &&
+          zip -r ${{ github.event.repository.name }}/${{ github.event.repository.name }}.zip ${{ github.event.repository.name }} \
+          -x "${{ github.event.repository.name }}/.git/*" \
+          -x "${{ github.event.repository.name }}/.github/*" \
+          -x "${{ github.event.repository.name }}/assets/src/*" \
+          -x "${{ github.event.repository.name }}/bin/*" \
+          -x "${{ github.event.repository.name }}/node_modules/*" \
+          -x "${{ github.event.repository.name }}/tests/*" \
+          -x "${{ github.event.repository.name }}/composer.json" \
+          -x "${{ github.event.repository.name }}/composer.lock" \
+          -x "${{ github.event.repository.name }}/mix-manifest.json" \
+          -x "${{ github.event.repository.name }}/package-lock.json" \
+          -x "${{ github.event.repository.name }}/package.json" \
+          -x "${{ github.event.repository.name }}/phpunit.xml.dist" \
+          -x "${{ github.event.repository.name }}/.distignore" \
+          -x "${{ github.event.repository.name }}/.editorconfig" \
+          -x "${{ github.event.repository.name }}/.gitignore" \
+          -x "${{ github.event.repository.name }}/phpstan.neon" \
+          -x "${{ github.event.repository.name }}/phpunit.xml.dist" \
+          -x "${{ github.event.repository.name }}/.phpcs.xml.dist" \
+          -x "${{ github.event.repository.name }}/.travis.yml" \
+          -x "${{ github.event.repository.name }}/webpack.mix.js"
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ${{ github.event.repository.name }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

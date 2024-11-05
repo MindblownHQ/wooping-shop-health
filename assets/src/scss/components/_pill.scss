@@ -1,0 +1,23 @@
+.wsh-pill {
+	border-radius: 1rem;
+	padding: 4px 10px;
+	border-width: 1px;
+	border-style: solid;
+	display: inline-block;
+	background-color: transparent;
+
+	&--positive {
+		color: var(--wsh-success);
+		border-color: var(--wsh-success);
+		background-color: rgba(99, 229, 70, 0.18);
+	}
+
+	&--negative {
+		background-color: var(--wsh-error);
+	}
+
+	&__score {
+		background-color: hsl( var(--score), 70%, 50%);
+		border-color: hsl( var(--score), 70%, 50%);
+	}
+}

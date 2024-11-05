@@ -1,0 +1,110 @@
+<?php
+
+namespace Wooping\ShopHealth\Models;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Wooping\ShopHealth\Contracts\Model;
+
+/**
+ * Class Issue
+ *
+ * This class represents an issue
+ *
+ * @package Wooping\ShopHealth\Models
+ */
+class Issue extends Model {
+	/**
+	 * All allowed statuses of an issue
+	 *
+	 * @var array
+	 */
+	public const STATUSES = [
+		'open',
+		'resolved',
+		'ignored',
+		'sticky',
+	];
+
+	/**
+	 * All final statuses (these can't be altered)
+	 *
+	 * @var array
+	 */
+	public const FINAL_STATUSES = [
+		'resolved',
+		'ignored',
+	];
+
+	/**
+	 * Define the table name
+	 *
+	 * @var string
+	 */
+	protected $table = 'woop_issues';
+
+	/**
+	 * Everything is fillable, except id:
+	 *
+	 * @var string[]
+	 */
+	protected $guarded = [ 'id' ];
+
+	/**
+	 * An issue belongs to a product
+	 *
+	 * @return BelongsTo The associated product.
+	 */
+	public function scanned_object(): BelongsTo {
+		return $this->belongsTo( ScannedObject::class );
+	}
+
+	/**
+	 * Calculate scores on creation and update
+	 */
+	public static function boot(): void {
+		parent::boot();
+		static::created(
+			static function ( $model ) {
+				// @todo add $model->scanned_object->calulcate_score();
+			}
+		);
+
+		static::updated(
+			static function ( $model ) {
+				// @todo add $model->scanned_object->calulcate_score();
+			}
+		);
+	}
+
+	/**
+	 * Return a link to the documentation of this issue
+	 *
+	 * This function is directly accessible using $issue->docs_description (Laravel Accessors)
+	 */
+	public function getDocsLinkAttribute(): string {
+		return \woop_get_link( \trailingslashit( \SHOP_HEALTH_DOCUMENTATION_URL ) . $this->validator );
+	}
+
+	/**
+	 * Return the text of the documentation link for this issue
+	 *
+	 * This function is directly accessible using $issue->docs_description (Laravel Accessors)
+	 */
+	public function getDocsDescriptionAttribute(): string {
+		return $this->validator_class::documentation();
+	}
+
+	/**
+	 * Return the validator class
+	 *
+	 * @return string
+	 */
+	public function getValidatorClassAttribute(): string {
+		$base = 'Wooping\\ShopHealth\\Validators\\';
+		if ( \is_null( $this->scanned_object->object_id ) ) {
+			return $base . 'Settings\\' . $this->validator;
+		} else {
+			return $base . 'Products\\' . $this->validator;
+		}
+	}
+}

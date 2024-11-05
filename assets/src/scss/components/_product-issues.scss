@@ -1,0 +1,19 @@
+.wsh-product-issues-table {
+	grid-template-columns: 1fr repeat( 2, 100px );
+
+	.wsh-issues-table {
+		&__issues-container {
+			grid-template-columns: 1fr repeat(2, minmax(100px, min-content) );
+			background-color: #f7f7f7;
+			display: none;
+
+			header {
+				display: grid;
+				font-weight: 600;
+				grid-column: 1 / -1;
+				grid-template-columns: subgrid;
+				padding: 20px 20px 0;
+			}
+		}
+	}
+}

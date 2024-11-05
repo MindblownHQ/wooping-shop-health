@@ -1,0 +1,24 @@
+#wooping_product_health_issues_metabox {
+	.wsh-issues-table__issues,
+	.wsh-product-issues-table .wsh-issues-table__issues-container header {
+		padding: 0;
+	}
+
+	.wsh-no-issues-notice{
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: center;
+
+		svg{
+			width: 2rem;
+			height: 2rem;
+			stroke: var( --wsh-error );
+			margin-bottom: 1rem;
+		}
+
+		p{
+			margin: 0 0 .5rem 0;
+			text-align: center;
+		}
+	}
+}

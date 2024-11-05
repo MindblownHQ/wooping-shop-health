@@ -1,0 +1,92 @@
+.wsh-widgets {
+	&__container {
+		display: grid;
+		position: relative;
+		grid-gap: var(--wsh-column-gap);
+
+		&.hpos-disabled {
+			> .wsh-box {
+				filter: blur(5px);
+				opacity: .5;
+				pointer-events: none;
+			}
+		}
+
+		&__overlay {
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			background: color-mix(in srgb, var(--white) 50%, transparent);
+			z-index: 100;
+			display: flex;
+			align-items: center;
+			border: 1px solid var(--wsh-border-color);
+			border-radius: var(--wsh-border-radius);
+
+			.hpos-notification{
+				display: grid;
+				grid-template-columns: 100px 1fr;
+				padding: var(--wsh-padding);
+
+				svg{
+					grid-template-rows: span 3;
+					align-items: center;
+					grid-column: 1;
+					width: 2rem;
+					height: 2rem;
+					margin: auto;
+					color: var( --red );
+				}
+
+				* {
+					grid-column: 2/3;
+				}
+
+				h2, p{
+					margin: 0 0 .5rem 0;
+				}
+			}
+		}
+
+		.wsh-statistics & {
+			margin-bottom: var(--wsh-column-gap);
+			
+			@media(min-width: 640px) {
+				grid-template-columns: repeat( 3, 1fr );
+			}
+		}
+
+		&.wsh-analytics {
+			grid-template-areas:
+			"Widget-1 Widget-2"
+			 "Pressing Pressing"
+			"Subscribe Subscribe";
+
+			@media(min-width: 960px) {
+				grid-template-columns: repeat( 3, 1fr );
+				grid-template-areas:
+			"Widget-1 Widget-2 Pressing"
+			"Subscribe Subscribe Pressing";
+			}
+		}
+
+
+		[data-location="1"] {
+			grid-area: Widget-1;
+		}
+
+		[data-location="2"] {
+			grid-area: Widget-2;
+		}
+
+		[data-location="pressing"] {
+			grid-area: Pressing;
+		}
+
+		[data-location="subscribe"] {
+			grid-area: Subscribe;
+		}
+	}
+}

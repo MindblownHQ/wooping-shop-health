@@ -1,0 +1,40 @@
+:root {
+	// widths
+	--wsh-column-gap: 1.6rem;
+	--wsh-column-min-width: 10rem;
+	--wsh-column-max-width: 30rem;
+	--wsh-container-max-width: calc(var(--wsh-column-max-width) * var(--wsh-max-columns) + var(--wsh-column-gap) * (var(--wsh-max-columns) - 1));
+	--wsh-max-columns: 3;
+
+	// colors
+	--wsh-blue: #2271B1;
+	--wsh-white: #fff;
+	--wsh-black: #000;
+	--wsh-dark-grey: #444;
+	--wsh-grey-200: #E5E7EB;
+	--wsh-grey-600: #9CA3AF;
+	//--wsh-success: hsl(100 100% 45%);
+	--wsh-success: #1ed14b;
+	//--wsh-warn: hsl(50 100% 60%);
+	--wsh-warn: #f0c33c;
+	//--wsh-error: hsl(0 100% 60%);
+	--wsh-error: #ff8085;
+	--wsh-border-color: rgba(0,0,0, 0.15);
+
+	// margins and paddings
+	--wsh-padding: 20px;
+	--wsh-margin: 20px;
+	--wsh-border-radius: 12px;
+
+	// font sizes
+	--wsh-font-size-xs: 0.75rem;     /* 12px */
+	--wsh-font-size-small: 0.875rem; /* 14px */
+	--wsh-font-size-base: 1rem;      /* 16px */
+	--wsh-font-size-lg: 1.125rem;    /* 18px */
+	--wsh-font-size-xl: 1.25rem;     /* 20px */
+	--wsh-font-size-xxl: 1.5rem;     /* 24px */
+	--wsh-font-size-xxxl: 2rem;       /* 32px */
+	--wsh-font-size-4xl: 3rem;       /* 48px */
+	--wsh-font-size-5xl: 3.5rem;     /* 56px */
+	--wsh-font-size-6xl: 4.5rem;     /* 72px */
+}

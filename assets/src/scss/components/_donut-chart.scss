@@ -1,0 +1,24 @@
+.wsh-donut-chart {
+	background: conic-gradient(
+					var(--wsh-success) 0% calc(var(--success-percentage) * 1%),
+					var(--wsh-warn) calc(var(--success-percentage) * 1%) 100%
+	);
+	border-radius: 50%;
+	aspect-ratio: 1;
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 2rem auto;
+
+	&__center {
+		border-radius: 50%;
+		aspect-ratio: 1;
+		width: 75%;
+		background-color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+}

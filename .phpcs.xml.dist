@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<ruleset name="Mind Blown Productions CS ruleset">
+    <!-- Include Yoast CS rules -->
+    <rule ref="Yoast">
+        <!-- Provide the plugin specific prefixes for all naming related sniffs. -->
+        <properties>
+            <property name="psr4_paths" type="array">
+                <element key="Wooping\ShopHealth\" value="src/"/>
+            </property>
+        </properties>
+
+        <!-- Exclude Yoast CS file naming convention -->
+        <!-- @todo: Replace with a custom sniff of our own that PSR-4 file names -->
+        <exclude name="Yoast.Files.FileName" />
+
+        <!-- Remove this specific Yoast sniff, since we are not using it -->
+        <exclude name="Yoast.Files.TestDoubles.MissingBasePath" />
+
+        <!-- Variable comments are not always necessary, so we're excluding this sniff -->
+        <exclude name="Squiz.Commenting.VariableComment.Missing" />
+
+        <!-- @var is not always necessary. So no need to enforce it -->
+        <exclude name="Squiz.Commenting.VariableComment.MissingVar" />
+
+        <!-- We will use return types, instead of @return tags in function comments -->
+        <exclude name="Squiz.Commenting.FunctionComment.MissingReturn" />
+
+        <!-- We don't want the @package tag in files -->
+        <exclude name="Yoast.Commenting.FileComment.MissingPackageTag"/>
+
+        <!-- Ignore missing params tags as we use type hinting -->
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+
+        <!-- Allow direct database queries -->
+        <exclude name="WordPress.DB.DirectDatabaseQuery.DirectQuery"/>
+
+        <!-- @todo - this removes PHP 7.3 warnings, but these shouldn't show as we're compatible with 7.4+ -->
+        <exclude name="PHPCompatibility.Classes.NewTypedProperties.Found"/>
+
+        <!-- Else on a new line? Come on.. no! -->
+        <exclude name="Universal.ControlStructures.IfElseDeclaration.NoNewLine" />
+    </rule>
+
+    <rule ref="Yoast.NamingConventions.ObjectNameDepth">
+		<properties>
+			<property name="max_words" value="4" />
+			<property name="recommended_max_words" value="4" />
+		</properties>
+	</rule>
+
+	 <!-- Add manage_woocommerce as a valid capability to PHPCS  -->
+        <rule ref="WordPress.WP.Capabilities">
+            <properties>
+                <property name="custom_capabilities" type="array">
+                    <element value="manage_woocommerce"/>
+                </property>
+            </properties>
+        </rule>
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="wooping-shop-health"/>
+                <element value="default"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>

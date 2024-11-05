@@ -1,0 +1,12 @@
+.wsh-general-issues-table {
+	grid-template-columns: 1fr 100px;
+	grid-column-gap: 20px;
+
+	.wsh-issues-table {
+		&__issues-container {
+			grid-template-columns: subgrid;
+			border-bottom: 1px solid #ccc;
+			padding: 10px 20px;
+		}
+	}
+}

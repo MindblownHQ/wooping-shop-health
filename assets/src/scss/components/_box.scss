@@ -1,0 +1,19 @@
+.wsh-box {
+	border: 1px solid var(--wsh-border-color);
+	border-radius: var(--wsh-border-radius);
+	padding: var(--wsh-padding);
+
+	&__header {
+		margin-bottom: 1rem;
+		align-items: center;
+
+		svg {
+			height: 30px;
+			width: auto;
+		}
+	}
+
+	&__title {
+		margin: 0;
+	}
+}
