@@ -47,4 +47,4 @@ _wp shop-health clean_
 1. Clone the repository: `git@github.com:MindblownHQ/wooping-shop-health.git`
 2. Run `composer install` for installing composer dependencies
 3. Run `npm install` to install node dependencies
-4. And finally, run `npm run watch` to watch for SCSS and JS changes or `npm run production` for building the production assetsInstal
+4. And finally, run `npm run watch` to watch for SCSS and JS changes or `npm run production` for building the production assets
