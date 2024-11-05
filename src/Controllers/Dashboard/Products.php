@@ -26,7 +26,7 @@ class Products extends Controller {
 
 		// calculate pagination offset.
 		$offset    = ( ( $current_page - 1 ) * $per_page );
-		$total     = ScannedObject::where( 'object_type', 'product' )->count();
+		$total     = ScannedObject::where( 'object_type', 'product' )->where('score', '<', 100 )->count();
 		$max_pages = \ceil( $total / $per_page );
 
 		$products = ScannedObject::where( 'object_type', 'product' )

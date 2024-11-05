@@ -16,6 +16,7 @@ use Wooping\ShopHealth\Models\ScannedObject;
 	<h1 class="screen-reader-text"><?php esc_html_e( 'Wooping Shop Health Dashboard', 'wooping-shop-health' ); ?></h1>
 	<?php woop_template( 'components.header' ); ?>
 	<div class="wrap wsh-dashboard__main">
+		<?php woop_template( 'components.scan-progress' ); ?>
 		<section class="wsh-wrap">
 			<?php woop_template( 'components.dashboard-tabs' ); ?>
 			<section class="wsh-tabs-pane">
@@ -24,10 +25,8 @@ use Wooping\ShopHealth\Models\ScannedObject;
 					<p><?php esc_html_e( 'This is an overview of all the issues we found in your WooCommerce settings.', 'wooping-shop-health' ); ?></p>
 				</header>
 				<section class="wsh-tabs-pane__content">
-					<?php
-					if ( $objects->isEmpty() ) {
-						echo '<h2>' . esc_html__( 'No issues found.', 'wooping-shop-health' ) . '</h2>';
-						echo '<p>' . esc_html__( 'Congratulations. No issues were found with your general settings, you are doing great!', 'wooping-shop-health' );
+					<?php if ( $objects->isEmpty() ){
+						woop_template( 'components/empty-state' );				
 					} else { ?>
 						<div class="wsh-issues-table wsh-general-issues-table">
 							<header class="wsh-issues-table__header">

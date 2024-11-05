@@ -31,24 +31,9 @@ $current_user = wp_get_current_user();
 						</div>
 						<div class="wsh-scan-control">
 							<button class="button button-primary scan-all"><?php esc_html_e( 'Scan all', 'wooping-shop-health' ); ?></button>
-							<?php
-							$actions = as_get_scheduled_actions( [
-								'hook'     => 'woop_batch_scan_products',
-								'status'   => ActionScheduler_Store::STATUS_COMPLETE,
-								'per_page' => 1,
-								'orderby'  => 'date',
-								'order'    => 'DESC',
-							], 'ids' );
-
-							if ( is_array( $actions ) && ! empty( $actions ) ) {
-								$last_action = reset( $actions );
-								$logs        = ActionScheduler::logger()->get_logs( $last_action );
-								$last_log    = end( $logs );
-								$date        = $last_log->get_date();
-								$last_scan   = $date->format( wc_date_format() . ' ' . wc_time_format() );
-								echo '<p class="wsh-scan-control__last-scan">' . esc_html__( 'Last scan', 'wooping-shop-health' ) . ': ' . esc_html( $last_scan ) . '</p>';
-							}
-							?>
+							<?php if( !is_null( $last_scan ) ):?>
+								<p class="wsh-scan-control__last-scan"><?php echo esc_html( $last_scan );?></p>
+							<?php endif;?>
 						</div>
 					</div>
 				</header>

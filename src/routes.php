@@ -24,18 +24,6 @@ if ( ! function_exists( 'wooping_get_routes' ) ) {
 			'admin' => [
 				// post routes are urls we need to process.
 				'post' => [
-					'trigger_general_scan' => [
-						'triggers' => [ Cron::class, 'schedule_every_scan' ],
-					],
-					'trigger_products_scan' => [
-						'triggers' => [ Cron::class, 'schedule_all_product_scans' ],
-					],
-					'trigger_product_scan' => [
-						'triggers' => [ Cron::class, 'schedule_product_scan' ],
-					],
-					'trigger_settings_scan' => [
-						'triggers' => [ Cron::class, 'schedule_all_setting_scans' ],
-					],
 					'save_settings' => [
 						'triggers' => [ Settings::class, 'update' ],
 					],

@@ -12,10 +12,16 @@ use Wooping\ShopHealth\Models\ScannedObject;
 
 <div class="wrap">
 	<h1 class="screen-reader-text"><?php esc_html_e( 'Wooping Shop Health Dashboard', 'wooping-shop-health' ); ?></h1>
+	<?php woop_template( 'components.scan-progress' ); ?>
 	<section class="wsh-wrap">
 		<?php woop_template( 'components.dashboard-tabs' ); ?>
 		<section class="wsh-tabs-pane">
 			<section class="wsh-tabs-pane__content">
+				<?php 
+				if( $products->pluck('relevant_issues')->isEmpty() ){
+					woop_template( 'components.empty-state' );
+				
+				} else {?>
 				<div class="wsh-issues-table wsh-product-issues-table">
 					<header class="wsh-issues-table__header">
 						<span
@@ -95,8 +101,10 @@ use Wooping\ShopHealth\Models\ScannedObject;
 						</div>
 					<?php } ?>
 				</div>
+				<?php }?>
 			</section>
 			<!-- pagination: -->
+			<?php if( !empty( $products ) && $max_pages > 1 ):?>
 			<nav class="wsh-pagination">
 				<?php
 				$baseurl = \woop_get_route( 'product_issues' );
@@ -111,6 +119,7 @@ use Wooping\ShopHealth\Models\ScannedObject;
 				}
 				?>
 			</nav>
+			<?php endif;?>
 		</section>
 	</section>
 </div>

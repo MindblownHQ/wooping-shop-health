@@ -17,3 +17,21 @@
 		}
 	}
 }
+
+.wsh-no-issues-notice {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+
+	svg {
+		width: 2rem;
+		height: 2rem;
+		stroke: var(--wsh-error);
+		margin-bottom: 1rem;
+	}
+
+	p {
+		margin: 0 0 .5rem 0;
+		text-align: center;
+	}
+}
