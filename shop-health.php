@@ -3,7 +3,7 @@
  * Plugin Name: Wooping Shop Health
  * Plugin URI: https://wooping.io
  * Description: Shop Health is a free tool for Woocommerce that helps you increase your sales with actionable advice.
- * Version: 0.9
+ * Version: 0.9.8
  * Author: Wooping
  * Author URI: https://wooping.io
  * License: GPL v2 or later
