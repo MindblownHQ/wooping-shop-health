@@ -25,7 +25,7 @@ class HasMyAccountPage extends SettingsValidator {
 		$page_id = \wc_get_page_id( 'myaccount' );
 
 		// $page_url should not be the same as the home URL and the url_to_post ID should not be -1 (failed).
-		return get_permalink( $page_id ) !== \get_home_url() && $page_id !== -1;
+		return \get_permalink( $page_id ) !== \get_home_url() && $page_id !== -1;
 	}
 
 	/**

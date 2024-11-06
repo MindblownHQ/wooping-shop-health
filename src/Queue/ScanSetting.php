@@ -3,8 +3,8 @@
 namespace Wooping\ShopHealth\Queue;
 
 use Wooping\ShopHealth\Contracts\ValidationQueueable;
-use Wooping\ShopHealth\Models\ScannedObject;
 use Wooping\ShopHealth\Helpers\ScoreCalculator;
+use Wooping\ShopHealth\Models\ScannedObject;
 use Wooping\ShopHealth\Validators\SettingContainer;
 
 /**
@@ -67,11 +67,10 @@ class ScanSetting extends ValidationQueueable {
 		}
 
 		// After all validators have run, calculate the product score and save it.
-		$scanned_object->score = ( new ScoreCalculator() )->scanned_object( $scanned_object );
+		$score                 = ( new ScoreCalculator() )->scanned_object( $scanned_object );
+		$scanned_object->score = 100 - $score;
 		$scanned_object->save();
 	}
-
-
 
 	/**
 	 * Schedule an async action in the Action Scheduler.

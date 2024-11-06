@@ -18,9 +18,9 @@ class SuccessfulHTTPResponse extends Requirement {
 	 * A successful HTTP response has a status code below 300.
 	 */
 	public function passes(): bool {
-		try{
+		try {
 			return ( $this->validator->object->html()->get_status_code() < 300 );
-		}catch( Throwable $error ){
+		}catch ( Throwable $error ) {
 			return false;
 		}
 	}

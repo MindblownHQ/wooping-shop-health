@@ -2,8 +2,8 @@
 
 namespace Wooping\ShopHealth\Contracts;
 
-use Wooping\ShopHealth\Models\ScannedObject;
 use WC_Product;
+use Wooping\ShopHealth\Models\ScannedObject;
 
 /**
  * Blueprint for a product validator.

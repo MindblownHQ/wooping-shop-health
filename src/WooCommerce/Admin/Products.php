@@ -2,11 +2,11 @@
 
 namespace Wooping\ShopHealth\WooCommerce\Admin;
 
-use Wooping\ShopHealth\Models\Schema\AddScannedObjectsTable;
+use WC_Product;
 use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
 use Wooping\ShopHealth\Models\ScannedObject;
+use Wooping\ShopHealth\Models\Schema\AddScannedObjectsTable;
 use Wooping\ShopHealth\Queue\ScanProduct;
-use WC_Product;
 use WP_Post;
 
 /**
@@ -57,7 +57,7 @@ class Products implements Hookable {
 		}
 
 		// Check if the Shop Health database tables exist first, before hooking into anything.
-		if( ( new AddScannedObjectsTable() )->exists() === false ){
+		if ( ( new AddScannedObjectsTable() )->exists() === false ) {
 			return;
 		}
 
@@ -99,7 +99,7 @@ class Products implements Hookable {
 			$object = ScannedObject::where( 'object_id', $post_id )
 					->with( [ 'relevant_issues' ] )
 					->first();
-			if( !is_null( $object ) ){
+			if ( ! \is_null( $object ) ) {
 				echo '<div class="wsh-pill wsh-pill__score" style="--score: ' . \esc_html( $object->score ) . '">';
 				echo '<span>' . \esc_html( $object->score ) . '</span>';
 				echo '</div>';
@@ -113,9 +113,9 @@ class Products implements Hookable {
 	 * @return void
 	 */
 	public function add_health_meta_box() {
-		
+
 		// Check if the Shop Health database tables exist first, before hooking into anything.
-		if( ( new AddScannedObjectsTable() )->exists() === false ){
+		if ( ( new AddScannedObjectsTable() )->exists() === false ) {
 			return;
 		}
 
@@ -140,9 +140,9 @@ class Products implements Hookable {
 		$object = ScannedObject::where( 'object_id', $post->ID )
 								->with( [ 'relevant_issues' ] )
 								->first();
-		if( !is_null( $object ) ){
+		if ( ! \is_null( $object ) ) {
 			\woop_template( 'metaboxes.product-issues', \compact( 'object' ) );
-		}else{
+		}else {
 			\woop_template( 'metaboxes.empty-state' );
 		}
 	}

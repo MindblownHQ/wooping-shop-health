@@ -2,8 +2,8 @@
 
 namespace Wooping\ShopHealth\Contracts;
 
-use Wooping\ShopHealth\Models\ScannedObject;
 use WooCommerce;
+use Wooping\ShopHealth\Models\ScannedObject;
 
 /**
  * Blueprint for validating WooCommerce settings.

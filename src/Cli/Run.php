@@ -2,9 +2,9 @@
 
 namespace Wooping\ShopHealth\Cli;
 
+use WC_Product_Query;
 use Wooping\ShopHealth\Controllers\Cron;
 use Wooping\ShopHealth\Validators\SettingContainer;
-use WC_Product_Query;
 use WP_CLI;
 use WP_CLI_Command;
 

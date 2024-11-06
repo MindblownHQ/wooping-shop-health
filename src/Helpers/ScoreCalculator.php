@@ -14,13 +14,12 @@ class ScoreCalculator {
 	 * Get the shop settings score
 	 */
 	public function settings(): int {
-
-		// query all settings and add them to a total.
-		$settings = ScannedObject::setting()->with( [ 'relevant_issues' ] )->get();
-		$total    = $this->get_total( $settings );
-	
-		// turn into score.
-		return $this->calculate( $total, 'settings' );
+		// Return the average score.
+		$settingScore = ScannedObject::setting()->avg('score');
+		if ( !$settingScore ) {
+			$settingScore = 100;
+		}
+		return (int) $settingScore;
 	}
 
 	/**
@@ -30,7 +29,11 @@ class ScoreCalculator {
 	 */
 	public function global_product(): int {
 		// Return the average score.
-		return (int) ScannedObject::product()->avg('score');
+		$productScore = ScannedObject::product()->avg('score');
+		if ( !$productScore ) {
+			$productScore = 100;
+		}
+		return (int) $productScore;
 	}
 
 	/**
@@ -62,9 +65,9 @@ class ScoreCalculator {
 		// loop through 'em and add the running total.
 		if ( $collection->isEmpty() === false ) {
 			foreach ( $collection as $object ) {
-				if ( $object->object_id || $object->object_type == 'setting' ) {
+				if ( $object->object_id || $object->object_type === 'setting' ) {
 					$total += $object->score;
-				} 
+				}
 			}
 		}
 

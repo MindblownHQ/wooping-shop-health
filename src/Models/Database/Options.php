@@ -4,6 +4,9 @@ namespace Wooping\ShopHealth\Models\Database;
 
 use Wooping\ShopHealth\Helpers\Statistics;
 
+/**
+ * Wooping Options class. Used for setting and cleaning up options set bij the Wooping plugins.
+ */
 class Options {
 
 	/**
@@ -18,7 +21,7 @@ class Options {
 	}
 
 	/**
-	 * Clean up wooping records in the options table
+	 * Clean up Wooping records in the options table
 	 */
 	public function clean_up(): void {
 		global $wpdb;
@@ -35,7 +38,5 @@ class Options {
 		foreach ( $options as $option ) {
 			\delete_option( $option );
 		}
-
-		return;
 	}
 }

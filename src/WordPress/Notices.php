@@ -2,9 +2,9 @@
 
 namespace Wooping\ShopHealth\WordPress;
 
+use WC_Admin_Notices;
 use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
 use Wooping\ShopHealth\Contracts\Router;
-use WC_Admin_Notices;
 
 /**
  * Class Notices

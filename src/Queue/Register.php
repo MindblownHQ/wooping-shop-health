@@ -93,7 +93,7 @@ class Register {
 		$queueables = $this->queueables();
 		foreach ( $queueables as $queueable ) {
 
-			// loop through each instance and unschedule their hooks
+			// loop through each instance and unschedule their hooks.
 			$instance = '\\Wooping\\ShopHealth\\Queue\\' . $queueable;
 			\as_unschedule_all_actions( ( new $instance() )->get_hook() );
 		}

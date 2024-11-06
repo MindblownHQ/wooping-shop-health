@@ -2,9 +2,9 @@
 
 namespace Wooping\ShopHealth\Contracts;
 
+use ReflectionClass;
 use Wooping\ShopHealth\Models\Issue;
 use Wooping\ShopHealth\Models\ScannedObject;
-use ReflectionClass;
 
 /**
  * Abstract validator class to define the requirements for a validators for products, settings and pages.

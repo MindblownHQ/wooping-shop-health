@@ -61,10 +61,10 @@ class Settings extends Controller {
 				'',
 				true
 			);
-			
-		}else{
-			// update the option with an empty array as default
-			\update_option( 'wooping_shop_health_ignored_validators', []);
+
+		}else {
+			// update the option with an empty array as default.
+			\update_option( 'wooping_shop_health_ignored_validators', [] );
 		}
 
 		// return back to the settings page.

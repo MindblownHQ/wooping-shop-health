@@ -39,7 +39,7 @@ class Plugin {
 		// Run migrations.
 		( new Migrations() )->run();
 
-		// Save a copy of the stats
+		// Save a copy of the stats.
 		( new Options() )->save_statistics();
 
 		// Schedule a max_scores calculation.
@@ -47,7 +47,7 @@ class Plugin {
 			\as_enqueue_async_action( 'woop_calculate_max_scores', [], '', true );
 		}
 
-		// Log the activation
+		// Log the activation.
 		( new Updates() )->plugin_activated();
 
 		// Set activated.
@@ -61,16 +61,16 @@ class Plugin {
 	 */
 	public function uninstall(): void {
 
-		// Remove all scheduled tasks
+		// Remove all scheduled tasks.
 		( new Queue() )->clean();
 
-		// Roll back our migrations
+		// Roll back our migrations.
 		( new Migrations() )->roll_back();
 
-		// Clean up the wooping options
+		// Clean up the Wooping options.
 		( new Options() )->clean_up();
 
-		// Log the deactivation
+		// Log the deactivation.
 		( new Updates() )->plugin_deactivated();
 	}
 

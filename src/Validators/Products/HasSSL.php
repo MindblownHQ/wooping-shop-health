@@ -21,9 +21,9 @@ class HasSSL extends ProductValidator {
 	 * Does this product have a valid SSL certificate?
 	 */
 	public function passes(): bool {
-		try{
+		try {
 			return $this->object->html()->get_status_code() !== 495;
-		}catch( Throwable $error ){
+		}catch ( Throwable $error ) {
 			return false;
 		}
 	}

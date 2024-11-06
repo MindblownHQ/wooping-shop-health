@@ -48,27 +48,29 @@ class Scans {
 		return $response;
 	}
 
-
 	/**
 	 * Return the last scan from ActionScheduler
 	 *
 	 * @return string|null
 	 */
 	public static function get_last_scan(): ?string {
-		$actions = \as_get_scheduled_actions( [
-			'hook'     => 'woop_batch_scan_products',
-			'status'   => ActionScheduler_Store::STATUS_COMPLETE,
-			'per_page' => 1,
-			'orderby'  => 'date',
-			'order'    => 'DESC',
-		], 'ids' );
+		$actions = \as_get_scheduled_actions(
+			[
+				'hook'     => 'woop_batch_scan_products',
+				'status'   => ActionScheduler_Store::STATUS_COMPLETE,
+				'per_page' => 1,
+				'orderby'  => 'date',
+				'order'    => 'DESC',
+			],
+			'ids'
+		);
 
-		if ( is_array( $actions ) && ! empty( $actions ) ) {
-			$last_action = reset( $actions );
+		if ( \is_array( $actions ) && ! empty( $actions ) ) {
+			$last_action = \reset( $actions );
 			$logs        = ActionScheduler::logger()->get_logs( $last_action );
-			$last_log    = end( $logs );
+			$last_log    = \end( $logs );
 			$date        = $last_log->get_date();
-			$last_scan   = $date->format( wc_date_format() . ' ' . wc_time_format() );
+			$last_scan   = $date->format( \wc_date_format() . ' ' . \wc_time_format() );
 			return $last_scan;
 		}
 

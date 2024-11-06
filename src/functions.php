@@ -114,16 +114,16 @@ if ( ! function_exists( 'woop_get_link' ) ) {
 	 * Add parameters to outgoing links
 	 *
 	 * @param string $url    The URL.
-	 * @param string $plugin The plugin name
+	 * @param string $plugin The plugin name.
 	 *
 	 * @return string The url with extra parameters.
 	 */
 	function woop_get_link( $url, $plugin = 'shop-health' ): string {
 
-		$source = \woop_current_route();
+		$source = woop_current_route();
 
 		if ( empty( $source ) ) {
-			$screen = \get_current_screen();
+			$screen = get_current_screen();
 			$source = $screen && property_exists( $screen, 'base' ) ? $screen->base : 'unknown';
 
 			if ( $screen && property_exists( $screen, 'post_type' ) ) {
@@ -136,6 +136,6 @@ if ( ! function_exists( 'woop_get_link' ) ) {
 			'utm_source' => $source,
 		];
 
-		return \add_query_arg( $query_args, \trailingslashit( $url ) );
+		return add_query_arg( $query_args, trailingslashit( $url ) );
 	}
 }

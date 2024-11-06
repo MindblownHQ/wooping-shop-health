@@ -2,8 +2,8 @@
 
 namespace Wooping\ShopHealth\Queue;
 
-use Wooping\ShopHealth\Contracts\Queueable;
 use WC_Product_Query;
+use Wooping\ShopHealth\Contracts\Queueable;
 
 /**
  * Class BatchScanProducts

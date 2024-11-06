@@ -3,7 +3,6 @@
  * Contains all routes of this plugin
  */
 
-use Wooping\ShopHealth\Controllers\Cron;
 use Wooping\ShopHealth\Controllers\Dashboard\Dashboard;
 use Wooping\ShopHealth\Controllers\Dashboard\Products;
 use Wooping\ShopHealth\Controllers\Dashboard\Shop;
