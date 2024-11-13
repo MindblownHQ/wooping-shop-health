@@ -4,6 +4,7 @@ namespace Wooping\ShopHealth\Queue;
 
 use WC_Product_Query;
 use Wooping\ShopHealth\Contracts\Queueable;
+use Wooping\ShopHealth\Models\Database\Options;
 
 /**
  * Class BatchScanProducts
@@ -43,6 +44,9 @@ class BatchScanProducts extends Queueable {
 	 * @return void
 	 */
 	public function run( int $page, int $limit ): void {
+
+		// add timestamp here, so our progress bar can query on a certain timestamp.
+		( new Options() )->set_queue_timestamp();
 
 		// get all products in this batch.
 		$products = ( new WC_Product_Query(
