@@ -16,7 +16,7 @@ class Statistics {
 	 */
 	public function get( ?Carbon $from = null, ?Carbon $to = null ): array {
 
-		// set defaults for our carbon objects.
+		// Set defaults for our carbon objects.
 		if ( \is_null( $from ) ) {
 			$from = Carbon::now()->subMonth();
 		}
@@ -25,21 +25,21 @@ class Statistics {
 			$to = Carbon::now();
 		}
 
-		// set default response.
+		// Set default response.
 		$response = $this->get_default_response_array();
 
-		//check if HPOS table wc_orders exists:
+		// Check if HPOS table wc_orders exists.
 		if ( $this->table_exists( 'wc_orders' ) ) {
 
-			// set base response.
+			// Set base response.
 			$data                        = $this->get_customers_and_revenue( $from->format( 'Y-m-d' ), $to->format( 'Y-m-d' ) );
 			$data['returning_customers'] = $this->get_returning_customer_count( $from->format( 'Y-m-d' ), $to->format( 'Y-m-d' ) );
 
-			// change date to last period.
+			// Change date to last period.
 			$from = $from->subMonth();
 			$to   = $to->subMonth();
 
-			// get last period results and add them to the response.
+			// Get last period results and add them to the response.
 			$prev                             = $this->get_customers_and_revenue( $from->format( 'Y-m-d' ), $to->format( 'Y-m-d' ) );
 			$data['prev_avg_revenue']         = $prev['avg_revenue'];
 			$data['prev_customers']           = $prev['customers'];
@@ -86,9 +86,9 @@ class Statistics {
 					'id'         => 'customers',
 				],
 			];
-		} 
+		}
 
-		// return all results.
+		// Return all results.
 		return $response;
 	}
 
@@ -160,8 +160,8 @@ class Statistics {
 
 	/**
 	 * Get the average revenue and customers based on the period given
-	 * 
-	 * @return bool 
+	 *
+	 * @return bool
 	 */
 	protected function table_exists( string $table_name ) {
 		global $wpdb;
@@ -182,7 +182,7 @@ class Statistics {
 	 * Get default statistics array
 	 *
 	 * @return array <int|float>
-	 */	
+	 */
 	protected function get_default_response_array() {
 		return [
 			'returning' => [
@@ -208,7 +208,7 @@ class Statistics {
 				'addendum'   => \__( 'increase', 'wooping-shop-health' ),
 				'diff'       => 0,
 				'id'         => 'customers',
-			]
+			],
 		];
 	}
 }
