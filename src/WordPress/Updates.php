@@ -101,7 +101,7 @@ class Updates implements Hookable {
 		// Check if we're updating plugins.
 		if ( $this->verify_update_is_ours( $options ) ) {
 			// Schedule the calculation.
-			\as_enqueue_async_action( 'woop_calculate_max_scores', [], '', true );
+			\as_enqueue_async_action( 'woop_calculate_max_scores', [], '', true, 1000 );
 			return;
 		}
 	}
