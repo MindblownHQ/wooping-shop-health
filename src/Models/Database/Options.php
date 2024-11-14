@@ -5,7 +5,7 @@ namespace Wooping\ShopHealth\Models\Database;
 use Wooping\ShopHealth\Helpers\Statistics;
 
 /**
- * Wooping Options class. Used for setting and cleaning up options set bij the Wooping plugins.
+ * Wooping Options class. Used for setting and cleaning up options set by the Wooping plugins.
  */
 class Options {
 
