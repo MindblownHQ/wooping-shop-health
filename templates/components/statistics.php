@@ -1,13 +1,3 @@
-<?php
-/**
- * @var array $data
- * @var string $icon
- * @var string $type
- */
-$number_formatter = new NumberFormatter(get_user_locale(), NumberFormatter::CURRENCY);
-
-?>
-
 <section class="wsh-box" id="<?php printf('stats-%s', esc_attr($data['id'])) ?>">
     <header class="wsh-box__header">
         <?php echo sprintf('<h2 class="wsh-box__title">%s</h2>', esc_html($data['label'])); ?>
