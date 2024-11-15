@@ -16,7 +16,7 @@ class Updates implements Hookable {
 	/**
 	 * The url constants with which we communicate to the world outside.
 	 */
-	protected const UPDATE_URL   = 'https://updates.wooping.io/wooping-shop-health';
+	protected const UPDATE_URL   = 'https://staging.wooping.io/wp-json/wooping/v1/updates/wooping-shop-health';
 	protected const FEEDBACK_URL = 'https://wooping.io/wp-json/wooping/v1/';
 
 	/**
@@ -29,11 +29,16 @@ class Updates implements Hookable {
 		// Register git updater, if it exists.
 		if ( \class_exists( 'YahnisElsts\PluginUpdateChecker\v5\PucFactory' ) ) {
 
-			$updater = PucFactory::buildUpdateChecker(
-				static::UPDATE_URL,
-				\SHOP_HEALTH_FILE,
-				'shop-health'
-			);
+			try{ 
+				PucFactory::buildUpdateChecker(
+					static::UPDATE_URL,
+					\SHOP_HEALTH_FILE,
+					'shop-health'
+				);
+
+			}catch( Throwable $error ){
+				// Do nothing. Just no new updates found.
+			}
 		}
 
 		// Send data after plugin update.
