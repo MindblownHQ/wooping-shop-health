@@ -31,9 +31,9 @@ $number_formatter = new NumberFormatter(get_user_locale(), NumberFormatter::CURR
             <?php
             echo sprintf(
                 '<span class="wsh-statistics__result wsh-statistics__result--%1$s">%2$s&percnt; %3$s</span>',
-                $data['percentage'] > 0 ? esc_attr('positive') : esc_attr('negative'),
+                $data['percentage'] >= 0 ? esc_attr('positive') : esc_attr('negative'),
                 esc_html($data['percentage']),
-                $data['percentage'] > 0 ? esc_html('increase') : esc_html('decrease'),
+                $data['percentage'] >= 0 ? esc_html('increase') : esc_html('decrease'),
             );
             ?>
         </div>
