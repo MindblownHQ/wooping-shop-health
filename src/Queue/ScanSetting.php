@@ -68,7 +68,7 @@ class ScanSetting extends ValidationQueueable {
 
 		// After all validators have run, calculate the product score and save it.
 		$score                 = ( new ScoreCalculator() )->scanned_object( $scanned_object );
-		$scanned_object->score = 100 - $score;
+		$scanned_object->score = ( 100 - $score );
 		$scanned_object->save();
 	}
 

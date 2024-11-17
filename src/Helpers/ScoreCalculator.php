@@ -15,8 +15,8 @@ class ScoreCalculator {
 	 */
 	public function settings(): int {
 		// Return the average score.
-		$settingScore = ScannedObject::setting()->avg('score');
-		if ( !$settingScore ) {
+		$settingScore = ScannedObject::setting()->avg( 'score' );
+		if ( ! $settingScore ) {
 			$settingScore = 100;
 		}
 		return (int) $settingScore;
@@ -29,8 +29,8 @@ class ScoreCalculator {
 	 */
 	public function global_product(): int {
 		// Return the average score.
-		$productScore = ScannedObject::product()->avg('score');
-		if ( !$productScore ) {
+		$productScore = ScannedObject::product()->avg( 'score' );
+		if ( ! $productScore ) {
 			$productScore = 100;
 		}
 		return (int) $productScore;
