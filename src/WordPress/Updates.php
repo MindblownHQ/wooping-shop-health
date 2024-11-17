@@ -29,14 +29,14 @@ class Updates implements Hookable {
 		// Register git updater, if it exists.
 		if ( \class_exists( 'YahnisElsts\PluginUpdateChecker\v5\PucFactory' ) ) {
 
-			try{ 
+			try {
 				PucFactory::buildUpdateChecker(
 					static::UPDATE_URL,
 					\SHOP_HEALTH_FILE,
 					'shop-health'
 				);
 
-			}catch( Throwable $error ){
+			}catch ( Throwable $error ) {
 				// Do nothing. Just no new updates found.
 			}
 		}
