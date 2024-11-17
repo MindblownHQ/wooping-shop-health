@@ -32,8 +32,8 @@ $number_formatter = new NumberFormatter(get_user_locale(), NumberFormatter::CURR
             echo get_woocommerce_currency_symbol();
         }
         // Display the number in the format that fits the current user locale and without training zeroes.
-        $label = number_format_i18n($data['diff'], 2) < 0 ? ' less then last period' : ' more then last period';
-        echo esc_html(preg_replace('/(\.00$)|(,00$)/', '', number_format_i18n($data['text'], 2))) . $label;
+        $label = number_format_i18n($data['diff'], 2) < 0 ? ' ' . __('less then previous period', 'wooping-shop-health') : ' ' . __('more then previous period', 'wooping-shop-health');
+        echo esc_html(preg_replace('/(\.00$)|(,00$)/', '', number_format_i18n(abs($data['text']), 2))) . $label;
         ?>
     </div>
     <footer>
