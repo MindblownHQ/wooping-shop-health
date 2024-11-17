@@ -7,7 +7,8 @@ use Wooping\ShopHealth\Contracts\SettingsValidator;
 /**
  * Class HasWPCron
  *
- * This class extends the ShopValidator class to ensure that the site isn't using WP Cron but a server-based crontab.
+ * This class extends the ShopValidator class to check if WordPress is using the default WP Cron system
+ * or if it has been properly disabled in favor of a server-based crontab.
  */
 class HasWPCron extends SettingsValidator {
 
@@ -17,18 +18,18 @@ class HasWPCron extends SettingsValidator {
 	public const SEVERITY = 75;
 
 	/**
-	 * Test if the terms and conditions page is set in WooCommerce.
+	 * Check if WP Cron is disabled via wp-config.php constant.
 	 *
-	 * @return bool True if the terms and conditions page is set, otherwise false.
+	 * @return bool True if WP Cron is disabled, false if it's still enabled
 	 */
 	public function passes(): bool {
 		return ( !defined('DISABLE_WP_CRON') || DISABLE_WP_CRON === false );
 	}
 
 	/**
-	 * Provides a message if the terms and conditions page is not set.
+	 * Provides a message if WP Cron is still enabled.
 	 *
-	 * @return string The message advising to set the terms and conditions page.
+	 * @return string The message advising to disable WP Cron and use server cronjob instead.
 	 */
 	public function message(): string {
 		return \__( 'You aren\'t optimally using automated tasks. Add a server cronjob', 'wooping-shop-health' );
