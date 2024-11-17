@@ -32,7 +32,7 @@ class HasWPCron extends SettingsValidator {
 	 * @return string The message advising to disable WP Cron and use server cronjob instead.
 	 */
 	public function message(): string {
-		return \__( 'You aren\'t optimally using automated tasks. Add a server cronjob', 'wooping-shop-health' );
+		return \__( 'WooCommerce performance can be improved by using a server cronjob instead of WP Cron for automated tasks.', 'wooping-shop-health' );
 	}
 
 	/**
