@@ -23,7 +23,7 @@ class HasWPCron extends SettingsValidator {
 	 * @return bool True if WP Cron is disabled, false if it's still enabled
 	 */
 	public function passes(): bool {
-		return ( !defined('DISABLE_WP_CRON') || DISABLE_WP_CRON === false );
+		return ( ! \defined( 'DISABLE_WP_CRON' ) || \DISABLE_WP_CRON === false );
 	}
 
 	/**
