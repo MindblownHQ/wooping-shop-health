@@ -45,7 +45,7 @@ $current_user = wp_get_current_user();
 								<?php
 								echo '<p>';
 								/* translators: %1$s / %2$s expand to a link tag that leads to the Shop Health documentation pages */
-								$message = esc_html__( 'We measure the success of your shop by three pillars. More information on these pillars can be found on %1$sour website%2$s', 'wooping-shop-health' );
+								$message = esc_html__( 'We measure the success of your shop, for a period of the last 30 days, on our three pillars, compared to the 30 days before. More information on these pillars can be found on %1$sour website%2$s', 'wooping-shop-health' );
 								echo sprintf( $message, '<a href="' . woop_get_link(\trailingslashit( SHOP_HEALTH_DOCUMENTATION_URL ) . 'pillars-of-growth' ) . '" target="_blank">', '</a>' );
 								echo '</p>';
 								?>

@@ -16,7 +16,7 @@ class Statistics {
 	 */
 	public function get( ?Carbon $from = null, ?Carbon $to = null ): array {
 
-		// set defaults for our carbon objects.
+		// Set defaults for our carbon objects.
 		if ( \is_null( $from ) ) {
 			$from = Carbon::now()->subMonth();
 		}
@@ -25,15 +25,23 @@ class Statistics {
 			$to = Carbon::now();
 		}
 
-		// set base response.
+		// Set default response.
+		$response = $this->get_default_response_array();
+
+		// Check if HPOS table wc_orders exists.
+		if ( ! $this->table_exists( 'wc_orders' ) ) {
+			return $response;
+		}
+
+		// Set base response.
 		$data                        = $this->get_customers_and_revenue( $from->format( 'Y-m-d' ), $to->format( 'Y-m-d' ) );
 		$data['returning_customers'] = $this->get_returning_customer_count( $from->format( 'Y-m-d' ), $to->format( 'Y-m-d' ) );
 
-		// change date to last period.
+		// Change date to last period.
 		$from = $from->subMonth();
 		$to   = $to->subMonth();
 
-		// get last period results and add them to the response.
+		// Get last period results and add them to the response.
 		$prev                             = $this->get_customers_and_revenue( $from->format( 'Y-m-d' ), $to->format( 'Y-m-d' ) );
 		$data['prev_avg_revenue']         = $prev['avg_revenue'];
 		$data['prev_customers']           = $prev['customers'];
@@ -81,14 +89,14 @@ class Statistics {
 			],
 		];
 
-		// return all results.
+		// Return all results.
 		return $response;
 	}
 
 	/**
 	 * Get the amount of customers returning in a period
 	 */
-	public function get_returning_customer_count( string $from, string $to ): int {
+	protected function get_returning_customer_count( string $from, string $to ): int {
 
 		global $wpdb;
 
@@ -124,7 +132,7 @@ class Statistics {
 	 *
 	 * @return array <int>
 	 */
-	public function get_customers_and_revenue( string $from, string $to ): array {
+	protected function get_customers_and_revenue( string $from, string $to ): array {
 
 		global $wpdb;
 
@@ -149,5 +157,59 @@ class Statistics {
 		// phpcs:enable
 
 		return $response;
+	}
+
+	/**
+	 * Get the average revenue and customers based on the period given
+	 *
+	 * @return bool
+	 */
+	protected function table_exists( string $table_name ) {
+		global $wpdb;
+
+		$table = $wpdb->prefix . $table_name;
+
+		// phpcs:ignore
+		$table_check = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) );
+
+		// phpcs:ignore
+		if ( $wpdb->get_var( $table_check ) == $table ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Get default statistics array
+	 *
+	 * @return array <int|float>
+	 */
+	protected function get_default_response_array() {
+		return [
+			'returning' => [
+				'percentage' => 0,
+				'label'      => 'Returning customers',
+				'text'       => '+0',
+				'addendum'   => \__( 'increase', 'wooping-shop-health' ),
+				'diff'       => 0,
+				'id'         => 'returning',
+			],
+			'revenue'   => [
+				'percentage' => 0,
+				'text'       => '+0',
+				'label'      => 'Order value',
+				'addendum'   => \__( 'increase', 'wooping-shop-health' ),
+				'diff'       => 0,
+				'id'         => 'revenue',
+			],
+			'customers' => [
+				'percentage' => 0,
+				'text'       => '+0',
+				'label'      => 'New customers',
+				'addendum'   => \__( 'increase', 'wooping-shop-health' ),
+				'diff'       => 0,
+				'id'         => 'customers',
+			],
+		];
 	}
 }
