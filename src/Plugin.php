@@ -115,10 +115,15 @@ class Plugin {
 	 */
 	public function boot(): void {
 		$capsule = new Capsule();
+
+		// Retrieve the default port
+		$default_port = \ini_get( 'mysqli.default_port' );
+
 		$capsule->addConnection(
 			[
 				'driver'    => 'mysql',
 				'host'      => \DB_HOST,
+				'port'      => $default_port,
 				'database'  => \DB_NAME,
 				'username'  => \DB_USER,
 				'password'  => \DB_PASSWORD,
