@@ -2,6 +2,7 @@
 
 namespace Wooping\ShopHealth\WordPress;
 
+use Throwable;
 use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
 use WP_Upgrader;
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
@@ -36,7 +37,7 @@ class Updates implements Hookable {
 					'shop-health'
 				);
 
-			}catch ( Throwable $error ) {
+			} catch ( Throwable $error ) {
 				// Do nothing. Just no new updates found.
 			}
 		}
