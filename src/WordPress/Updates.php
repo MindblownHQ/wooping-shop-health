@@ -2,6 +2,7 @@
 
 namespace Wooping\ShopHealth\WordPress;
 
+use Throwable;
 use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
 use WP_Upgrader;
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
@@ -29,11 +30,16 @@ class Updates implements Hookable {
 		// Register git updater, if it exists.
 		if ( \class_exists( 'YahnisElsts\PluginUpdateChecker\v5\PucFactory' ) ) {
 
-			$updater = PucFactory::buildUpdateChecker(
-				static::UPDATE_URL,
-				\SHOP_HEALTH_FILE,
-				'shop-health'
-			);
+			try {
+				PucFactory::buildUpdateChecker(
+					static::UPDATE_URL,
+					\SHOP_HEALTH_FILE,
+					'shop-health'
+				);
+
+			} catch ( Throwable $error ) {
+				// Do nothing. Just no new updates found.
+			}
 		}
 
 		// Send data after plugin update.
