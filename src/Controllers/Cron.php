@@ -8,6 +8,7 @@ use Wooping\ShopHealth\Queue\BatchScanProducts;
 use Wooping\ShopHealth\Queue\ScanProduct;
 use Wooping\ShopHealth\Queue\ScanSetting;
 use Wooping\ShopHealth\Validators\SettingContainer;
+use Wooping\ShopHealth\Models\Database\Options;
 use WP_REST_Response;
 
 /**
@@ -35,6 +36,13 @@ class Cron extends Controller {
 	 * Schedule a scan for all available products
 	 */
 	public function schedule_all_product_scans(): void {
+
+		// add timestamp here, so our progress bar can query on a certain timestamp.
+		( new Options() )->set_queue_timestamp();
+
+		// Remove any of the old product scans in the old queue
+		\as_unschedule_all_actions( 'woop_batch_scan_products' );
+		\as_unschedule_all_actions( 'woop_scan_product' );
 
 		// query all products.
 		$product_amount = Scans::get_total_product_amount();

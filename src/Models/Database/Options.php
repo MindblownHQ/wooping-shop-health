@@ -5,7 +5,7 @@ namespace Wooping\ShopHealth\Models\Database;
 use Wooping\ShopHealth\Helpers\Statistics;
 
 /**
- * Wooping Options class. Used for setting and cleaning up options set bij the Wooping plugins.
+ * Wooping Options class. Used for setting and cleaning up options set by the Wooping plugins.
  */
 class Options {
 
@@ -18,6 +18,15 @@ class Options {
 		\update_option( 'wooping_shop_health_statistics', $stats );
 
 		return $stats;
+	}
+
+
+	/**
+	 * Save a timestamp for when the queue was last updated with issues
+	 */
+	public function set_queue_timestamp(): void {
+		
+		\update_option( 'wooping_shop_health_scan_last_triggered', time() );
 	}
 
 	/**
