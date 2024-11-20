@@ -4,9 +4,9 @@ namespace Wooping\ShopHealth\WooCommerce\Admin;
 
 use WC_Product;
 use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
+use Wooping\ShopHealth\Models\Database\Options;
 use Wooping\ShopHealth\Models\ScannedObject;
 use Wooping\ShopHealth\Models\Schema\AddScannedObjectsTable;
-use Wooping\ShopHealth\Models\Database\Options;
 use Wooping\ShopHealth\Queue\ScanProduct;
 use WP_Post;
 
@@ -166,7 +166,7 @@ class Products implements Hookable {
 		if ( \in_array( $product->get_status(), [ 'trash', 'auto-draft' ], true ) ) {
 			return;
 		}
-		
+
 		// add timestamp here, so our progress bar can query on a certain timestamp.
 		( new Options() )->set_queue_timestamp();
 

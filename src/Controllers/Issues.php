@@ -39,8 +39,10 @@ class Issues extends Controller {
 
 			return new WP_REST_Response(
 				[
-					'status'  => 'success',
-					'message' => \__( 'The issue status has been updated.', 'wooping-shop-health' ),
+					'status'        => 'success',
+					'message'       => \__( 'The issue status has been updated.', 'wooping-shop-health' ),
+					'score'         => $scanned_object->score,
+					'issue_count'   => $scanned_object->relevant_issues()->count(),
 				],
 				200
 			);

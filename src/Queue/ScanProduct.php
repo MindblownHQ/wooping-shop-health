@@ -4,7 +4,6 @@ namespace Wooping\ShopHealth\Queue;
 
 use Wooping\ShopHealth\Contracts\ProductValidator;
 use Wooping\ShopHealth\Contracts\ValidationQueueable;
-use Wooping\ShopHealth\Helpers\ScoreCalculator;
 use Wooping\ShopHealth\Models\ScannedObject;
 use Wooping\ShopHealth\Validators\ProductContainer;
 
@@ -95,9 +94,7 @@ class ScanProduct extends ValidationQueueable {
 		}
 
 		// After all validators have run, calculate the product score and save it.
-		$score                 = ( new ScoreCalculator() )->scanned_object( $scanned_object );
-		$scanned_object->score = ( new ScoreCalculator() )->calculate( $score, 'products' );
-		$scanned_object->save();
+		$scanned_object->recalculate_score()->save();
 	}
 
 	/**
