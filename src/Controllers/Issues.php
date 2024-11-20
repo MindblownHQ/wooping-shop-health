@@ -34,7 +34,7 @@ class Issues extends Controller {
 		try {
 			// Save the issue with the new status.
 			$issue         	= Issue::findOrFail(  $issue_id ); // phpcs:ignore
-			$issue->status 	= $status;
+			$issue->status = $status;
 			$issue->save();
 
 			// Recalculate the main score.
