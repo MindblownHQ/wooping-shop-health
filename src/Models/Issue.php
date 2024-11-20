@@ -90,8 +90,14 @@ class Issue extends Model {
 	 *
 	 * This function is directly accessible using $issue->docs_description (Laravel Accessors)
 	 */
-	public function getDocsDescriptionAttribute(): string {
-		return $this->validator_class::documentation();
+	public function getDocsDescriptionAttribute(): ?string {
+		$validator = $this->validator_class;
+
+		if( class_exists( $validator ) ){
+			return $validator::documentation();
+		}
+
+		return null;
 	}
 
 	/**
