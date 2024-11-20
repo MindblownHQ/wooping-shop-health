@@ -93,7 +93,7 @@ class ScannedObject extends Model {
 	 */
 	public function recalculate_score(): ScannedObject {
 
-		$score = ( new ScoreCalculator() )->scanned_object( $scanned_object );
+		$score = ( new ScoreCalculator() )->scanned_object( $this );
 
 		// For a product, get the relative score based on the max_score
 		if ( $this->object_type == 'product' ) {

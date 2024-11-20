@@ -32,10 +32,14 @@ class Issues extends Controller {
 		}
 
 		try {
-			// save the issue with the new status.
-			$issue         = Issue::findOrFail(  $issue_id ); // phpcs:ignore
-			$issue->status = $status;
+			// Save the issue with the new status.
+			$issue         	= Issue::findOrFail(  $issue_id ); // phpcs:ignore
+			$issue->status 	= $status;
 			$issue->save();
+
+			// Recalculate the main score.
+			$scanned_object = $issue->scanned_object;
+			$scanned_object->recalculate_score()->save();
 
 			return new WP_REST_Response(
 				[
