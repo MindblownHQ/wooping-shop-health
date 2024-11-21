@@ -58,7 +58,7 @@ class Statistics {
 				'text'       => ( ( $returning['diff'] > 0 ) ? '+' : '' ) . $returning['diff'],
 				'addendum'   => ( $returning['diff'] >= 0 ) ? \__( 'increase', 'wooping-shop-health' ) : \__( 'decrease', 'wooping-shop-health' ),
 				'diff'       => $returning['diff'],
-				'total'      => $data['returning_customers'],
+				'total'      => \round($data['returning_customers'], 2),
 				'id'         => 'returning',
 			],
 			'revenue'   => [
@@ -67,7 +67,7 @@ class Statistics {
 				'label'      => 'Order value',
 				'addendum'   => ( $revenue['diff'] >= 0 ) ? \__( 'increase', 'wooping-shop-health' ) : \__( 'decrease', 'wooping-shop-health' ),
 				'diff'       => $revenue['diff'],
-				'total'      => $data['avg_revenue'],
+				'total'      => \round( $data['avg_revenue'], 2 ),
 				'id'         => 'revenue',
 			],
 			'customers' => [
@@ -76,7 +76,7 @@ class Statistics {
 				'label'      => 'New customers',
 				'addendum'   => ( $customers['diff'] >= 0 ) ? \__( 'increase', 'wooping-shop-health' ) : \__( 'decrease', 'wooping-shop-health' ),
 				'diff'       => $customers['diff'],
-				'total'      => $data['customers'],
+				'total'      => \round( $data['customers'], 2 ),
 				'id'         => 'customers',
 			],
 		];

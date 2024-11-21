@@ -4,8 +4,6 @@
  * @var string $icon
  * @var string $type
  */
-$number_formatter = new NumberFormatter(get_user_locale(), NumberFormatter::CURRENCY);
-
 ?>
 
 <section class="wsh-box" id="<?php printf('stats-%s', esc_attr($data['id'])) ?>">
