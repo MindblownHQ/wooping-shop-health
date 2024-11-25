@@ -5,7 +5,6 @@
  * @var string $type
  */
 ?>
-
 <section class="wsh-box" id="<?php printf('stats-%s', esc_attr($data['id'])) ?>">
     <header class="wsh-box__header">
         <?php echo sprintf('<h2 class="wsh-box__title">%s</h2>', esc_html($data['label'])); ?>

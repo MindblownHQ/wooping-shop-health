@@ -12,6 +12,11 @@
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: woocommerce
+ * 
+ * Woo: wooping-shop-health
+ * WC requires at least: 8.6
+ * WC tested up to: 9.4
+ * 
  * GitHub Plugin URI: https://github.com/MindblownHQ/wooping-shop-health
  * Primary Branch: main
  * Release Asset: true

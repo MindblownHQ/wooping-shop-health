@@ -103,17 +103,19 @@ class Updates implements Hookable {
 		if ( $this->verify_update_is_ours( $options ) ) {
 			// Schedule the max-score calculation.
 			\as_enqueue_async_action( 'woop_calculate_max_scores', [], '', true );
-			return;
 		
 			// Re-save the statistics.
 			( new Options() )->save_statistics();
-		}
+
+      return;
+
+    }
 	}
 
 	/**
 	 * Check if an update being run belongs to us
 	 */
-	public function verify_update_is_ours(): bool {
+	public function verify_update_is_ours( array $options ): bool {
 		if ( $options['action'] === 'update' && $options['type'] === 'plugin' ) {
 			// loop through the plugins that we're updating.
 			foreach ( $options['plugins'] as $plugin ) {
