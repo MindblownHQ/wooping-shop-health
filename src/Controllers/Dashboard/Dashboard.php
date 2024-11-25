@@ -54,8 +54,8 @@ class Dashboard extends Controller {
 		$all_product_issues = $product_issues->get();
 
 		$last_scan = null;
-		$timestamp = get_option( 'wooping_shop_health_scan_last_triggered', null );
-		if( !is_null( $timestamp ) ){
+		$timestamp = \get_option( 'wooping_shop_health_scan_last_triggered', null );
+		if ( ! \is_null( $timestamp ) ) {
 			$last_scan = \date_i18n( 'j F, H:i', $timestamp );
 		}
 
