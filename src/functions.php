@@ -82,10 +82,10 @@ if ( ! function_exists( 'woop_template' ) ) {
 	 *
  	 * @phpcs:disable SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
 	 */
-	function woop_template( string $template_name, array $attributes = [] ): void {
+	function woop_template( string $template_name, array $attributes = [], $base_dir = SHOP_HEALTH_PATH ): void {
 
 		$template = str_replace( '.', '/', $template_name );
-		$file     = SHOP_HEALTH_PATH . '/templates/' . $template . '.php';
+		$file     = $base_dir . '/templates/' . $template . '.php';
 		if ( file_exists( $file ) ) {
 
 			// Extract args if there are any, this isn't best practice but for now, we're ignoring that.
