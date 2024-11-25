@@ -53,6 +53,12 @@ class Dashboard extends Controller {
 
 		$all_product_issues = $product_issues->get();
 
+		$last_scan = null;
+		$timestamp = get_option( 'wooping_shop_health_scan_last_triggered', null );
+		if( !is_null( $timestamp ) ){
+			$last_scan = \date_i18n( 'j F, H:i', $timestamp );
+		}
+
 		$pressing_product_issues = $product_issues
 				->orderByDesc( 'severity' )
 				->orderBy( 'created_at' )
@@ -68,7 +74,7 @@ class Dashboard extends Controller {
 			'pressing_product_issues' => $pressing_product_issues,
 			'stats'                   => \get_option( 'wooping_shop_health_statistics' ),
 			'has_hpos'                => $has_hpos,
-			'last_scan'               => Scans::get_last_scan(),
+			'last_scan'               => $last_scan,
 			'scans_in_progress'       => Scans::get_total_pending_jobs_in_queue(),
 		];
 
