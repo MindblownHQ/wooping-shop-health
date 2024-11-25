@@ -2,9 +2,10 @@
 
 namespace Wooping\ShopHealth\WordPress;
 
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
 use WP_Upgrader;
+use Wooping\ShopHealth\Models\Database\Options;
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
 
 /**
  * Class Updates
@@ -39,8 +40,8 @@ class Updates implements Hookable {
 		// Send data after plugin update.
 		\add_action( 'upgrader_process_complete', [ $this, 'plugin_updated' ], 10, 2 );
 
-		// Recalculate max scores after this plugin is updated.
-		\add_action( 'upgrader_process_complete', [ $this, 'update_max_scores' ], 100, 2 );
+		// Update any option-table values after our update is done.
+		\add_action( 'upgrader_process_complete', [ $this, 'update_options' ], 100, 2 );
 	}
 
 	/**
@@ -91,18 +92,21 @@ class Updates implements Hookable {
 	}
 
 	/**
-	 * Check if we need to update the max scores
+	 * Check if we need to update the option-table values
 	 *
 	 * @param WP_Upgrader   $wp_upgrader Upgrader class.
 	 * @param array<string> $options     Array with upgrader options (see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/).
 	 */
-	public function update_max_scores( WP_Upgrader $wp_upgrader, array $options ): void {
+	public function update_options( WP_Upgrader $wp_upgrader, array $options ): void {
 
 		// Check if we're updating plugins.
 		if ( $this->verify_update_is_ours( $options ) ) {
-			// Schedule the calculation.
+			// Schedule the max-score calculation.
 			\as_enqueue_async_action( 'woop_calculate_max_scores', [], '', true );
 			return;
+		
+			// Re-save the statistics.
+			( new Options() )->save_statistics();
 		}
 	}
 
