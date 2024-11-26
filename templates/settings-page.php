@@ -18,7 +18,7 @@
                                 <label class="issue-description" for="ignoreHasDimensions"
                                        title="<?php echo \esc_attr(esc_html__('Disable product dimension checks', 'wooping-shop-health')); ?>'">
                                     <strong><?php esc_html_e('Product Dimensions', 'wooping-shop-health'); ?></strong><br>
-                                    <?php esc_html_e('Checks wether or not your products have a heigh, width and weight defined.', 'wooping-shop-health'); ?>
+                                    <?php esc_html_e('Checks whether or not your products have a height, width and weight defined.', 'wooping-shop-health'); ?>
                                 </label>
                                 <input type="checkbox" <?php echo checked(in_array('HasDimensions', $ignored)); ?>
                                        id="ignoreHasDimensions" name="ignored_validators[]" value="HasDimensions">
@@ -45,7 +45,7 @@
                                 <label class="issue-description" for="ignoreHasTags"
                                        title="<?php echo \esc_attr(esc_html__('Disable product tags checks', 'wooping-shop-health')); ?>'">
                                     <strong><?php esc_html_e('Tags', 'wooping-shop-health'); ?></strong><br>
-                                    <?php esc_html_e('Checks wether or not your products have tags associated with them', 'wooping-shop-health'); ?>
+                                    <?php esc_html_e('Checks whether or not your products have tags associated with them', 'wooping-shop-health'); ?>
                                 </label>
                                 <input type="checkbox" <?php echo checked(in_array('HasTags', $ignored)); ?>
                                        id="ignoreHasTags" name="ignored_validators[]" value="HasTags">
@@ -63,7 +63,7 @@
                                 <label class="issue-description" for="ignoreHasStock"
                                        title="<?php echo \esc_attr(esc_html__('Disable product stock checks', 'wooping-shop-health')); ?>'">
                                     <strong><?php esc_html_e('Product Stock', 'wooping-shop-health'); ?></strong><br>
-                                    <?php esc_html_e('Checks wether or not your products has enough stock if stock keeping is enabled.', 'wooping-shop-health'); ?>
+                                    <?php esc_html_e('Checks whether or not your products has enough stock if stock keeping is enabled.', 'wooping-shop-health'); ?>
                                 </label>
                                 <input type="checkbox" <?php echo checked(in_array('HasStock', $ignored)); ?>
                                        id="ignoreHasStock" name="ignored_validators[]" value="HasStock">
