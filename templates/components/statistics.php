@@ -20,7 +20,9 @@
             echo get_woocommerce_currency_symbol();
         }
         // Display the number in the format that fits the current user locale and without training zeroes.
-        echo esc_html(preg_replace('/(\.00$)|(,00$)/', '', number_format_i18n($data['total'], 2)));
+        if (isset($data['total'])) {
+            echo esc_html(preg_replace('/(\.00$)|(,00$)/', '', number_format_i18n($data['total'], 2)));
+        }
         ?>
     </div>
     <div class="wsh-statistics__number__small">
