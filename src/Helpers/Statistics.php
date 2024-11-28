@@ -47,44 +47,36 @@ class Statistics {
 		$data['prev_customers']           = $prev['customers'];
 		$data['prev_returning_customers'] = $this->get_returning_customer_count( $from->format( 'Y-m-d' ), $to->format( 'Y-m-d' ) );
 
-		$returning = [
-			'percentage' => \ceil( ( $data['returning_customers'] > 0 && $data['prev_returning_customers'] > 0 ) ? ( ( $data['returning_customers'] / $data['prev_returning_customers'] ) * 100 ) : 100 ),
-			'diff'       => \round( ( $data['returning_customers'] - $data['prev_returning_customers'] ), 2 ),
-		];
-
-		$revenue = [
-			'percentage' => \ceil( ( $data['avg_revenue'] > 0 && $data['prev_avg_revenue'] > 0 ) ? ( ( $data['avg_revenue'] / $data['prev_avg_revenue'] ) * 100 ) : 100 ),
-			'diff'       => \round( ( $data['avg_revenue'] - $data['prev_avg_revenue'] ), 2 ),
-		];
-
-		$customers = [
-			'percentage' => \ceil( ( $data['customers'] > 0 && $data['prev_customers'] > 0 ) ? ( ( $data['customers'] / $data['prev_customers'] ) * 100 ) : 100 ),
-			'diff'       => \round( ( $data['customers'] - $data['prev_customers'] ), 2 ),
-		];
+		$returning = $this->calculate_differences( $data['prev_returning_customers'], $data['returning_customers'] );
+		$revenue   = $this->calculate_differences( $data['prev_avg_revenue'], $data['avg_revenue'] );
+		$customers = $this->calculate_differences( $data['prev_customers'], $data['customers'] );
 
 		$response = [
 			'returning' => [
-				'percentage' => ( ( $returning['diff'] <= 0 ) ? $returning['percentage'] - 100 : $returning['percentage'] ),
+				'percentage' => $returning['percentage'],
 				'label'      => 'Returning customers',
 				'text'       => ( ( $returning['diff'] > 0 ) ? '+' : '' ) . $returning['diff'],
 				'addendum'   => ( $returning['diff'] >= 0 ) ? \__( 'increase', 'wooping-shop-health' ) : \__( 'decrease', 'wooping-shop-health' ),
 				'diff'       => $returning['diff'],
+				'total'      => \round($data['returning_customers'], 2),
 				'id'         => 'returning',
 			],
 			'revenue'   => [
-				'percentage' => ( ( $revenue['diff'] <= 0 ) ? $revenue['percentage'] - 100 : $revenue['percentage'] ),
+				'percentage' => $revenue['percentage'],
 				'text'       => ( ( $revenue['diff'] > 0 ) ? '+' : '' ) . $revenue['diff'],
 				'label'      => 'Order value',
 				'addendum'   => ( $revenue['diff'] >= 0 ) ? \__( 'increase', 'wooping-shop-health' ) : \__( 'decrease', 'wooping-shop-health' ),
 				'diff'       => $revenue['diff'],
+				'total'      => \round( $data['avg_revenue'], 2 ),
 				'id'         => 'revenue',
 			],
 			'customers' => [
-				'percentage' => ( ( $customers['diff'] <= 0 ) ? $customers['percentage'] - 100 : $customers['percentage'] ),
+				'percentage' => $customers['percentage'],
 				'text'       => ( ( $customers['diff'] > 0 ) ? '+' : '' ) . $customers['diff'],
 				'label'      => 'New customers',
 				'addendum'   => ( $customers['diff'] >= 0 ) ? \__( 'increase', 'wooping-shop-health' ) : \__( 'decrease', 'wooping-shop-health' ),
 				'diff'       => $customers['diff'],
+				'total'      => \round( $data['customers'], 2 ),
 				'id'         => 'customers',
 			],
 		];
@@ -180,6 +172,28 @@ class Statistics {
 	}
 
 	/**
+	 * calculate diff in number and percentage
+	 *
+	 * @return array <int|float>
+	 */
+	protected function calculate_differences( float $old_value, float $new_value ) {
+		$percentage = -100;
+		$diff       = \round( ( $new_value - $old_value ), 2 );
+
+		if ( $old_value <= 0 ) {
+			$percentage = 100;
+		}elseif ( $diff == 0 ) {
+			$percentage = 0;
+		}else {
+			$percentage = \round( ( ( $diff / $old_value ) * 100 ), 2 );
+		}
+		return [
+			'percentage' => $percentage,
+			'diff'       => $diff,
+		];
+	}
+
+	/**
 	 * Get default statistics array
 	 *
 	 * @return array <int|float>
@@ -192,6 +206,7 @@ class Statistics {
 				'text'       => '+0',
 				'addendum'   => \__( 'increase', 'wooping-shop-health' ),
 				'diff'       => 0,
+				'total'      => 0,
 				'id'         => 'returning',
 			],
 			'revenue'   => [
@@ -200,6 +215,7 @@ class Statistics {
 				'label'      => 'Order value',
 				'addendum'   => \__( 'increase', 'wooping-shop-health' ),
 				'diff'       => 0,
+				'total'      => 0,
 				'id'         => 'revenue',
 			],
 			'customers' => [
@@ -208,6 +224,7 @@ class Statistics {
 				'label'      => 'New customers',
 				'addendum'   => \__( 'increase', 'wooping-shop-health' ),
 				'diff'       => 0,
+				'total'      => 0,
 				'id'         => 'customers',
 			],
 		];

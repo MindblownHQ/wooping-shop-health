@@ -25,13 +25,13 @@ document.addEventListener( "DOMContentLoaded", () => {
 						addNotice( result.message );
 
 						returning.querySelector( ".wsh-statistics__result" ).innerHTML = result.data.returning.percentage + "&percnt; " + result.data.returning.addendum;
-						returning.querySelector( ".wsh-statistics__number").innerHTML = result.data.returning.diff;
+						returning.querySelector( ".wsh-statistics__number").innerHTML = result.data.returning.total;
 
 						customers.querySelector( ".wsh-statistics__result" ).innerHTML = result.data.customers.percentage + "&percnt; " + result.data.customers.addendum;
-						customers.querySelector( ".wsh-statistics__number").innerHTML = result.data.customers.diff;
+						customers.querySelector( ".wsh-statistics__number").innerHTML = result.data.customers.total;
 
 						revenue.querySelector( ".wsh-statistics__result" ).innerHTML = result.data.revenue.percentage + "&percnt; " + result.data.revenue.addendum;
-						revenue.querySelector( ".wsh-statistics__number").innerHTML = shopHealth.currencySymbol + " " + result.data.revenue.diff;
+						revenue.querySelector( ".wsh-statistics__number").innerHTML = shopHealth.currencySymbol + result.data.revenue.total;
 					}
 					document.querySelectorAll( ".wsh-statistics .wsh-box" ).forEach( element => {
 						element.classList.remove( "refreshing" );
