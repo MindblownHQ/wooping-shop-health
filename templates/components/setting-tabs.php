@@ -1,7 +1,7 @@
 <?php
-$tabs = [
+$tabs = apply_filters('wooping_settings_tabs', [
 	'settings' => esc_html__( 'Ignored issues', 'wooping-shop-health' ),
-];
+]);
 ?>
 
 <section class="wsh-tabs__wrapper">
