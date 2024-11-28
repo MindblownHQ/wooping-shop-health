@@ -79,7 +79,7 @@ class Issue extends Model {
 	/**
 	 * Return a link to the documentation of this issue
 	 *
-	 * This function is directly accessible using $issue->docs_description (Laravel Accessors)
+	 * This function is directly accessible using $issue->docs_link (Laravel Accessors)
 	 */
 	public function getDocsLinkAttribute(): string {
 		return \woop_get_link( \trailingslashit( \SHOP_HEALTH_DOCUMENTATION_URL ) . $this->validator );
@@ -90,14 +90,20 @@ class Issue extends Model {
 	 *
 	 * This function is directly accessible using $issue->docs_description (Laravel Accessors)
 	 */
-	public function getDocsDescriptionAttribute(): string {
-		return $this->validator_class::documentation();
+	public function getDocsDescriptionAttribute(): ?string {
+		$validator = $this->validator_class;
+
+		if( class_exists( $validator ) ){
+			return $validator::documentation();
+		}
+
+		return null;
 	}
 
 	/**
 	 * Return the validator class
 	 *
-	 * @return string
+	 * This function is directly accessible using $issue->validator_class (Laravel Accessors)
 	 */
 	public function getValidatorClassAttribute(): string {
 		$base = 'Wooping\\ShopHealth\\Validators\\';

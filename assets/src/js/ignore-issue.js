@@ -20,15 +20,23 @@ document.addEventListener( "DOMContentLoaded", () => {
 						.then( result => {
 							if ( result.status === "success" ) {
 
-								// Update the issue count when in dashboard.
 								const productContainer = e.target.closest( ".wsh-issues-table__product");
 								if ( productContainer !== null ){
+									
+									// Update the issue count when in dashboard.
 									const issueCounterContainer = productContainer.querySelector("[data-id=\"issue-count\"]");
 									if ( issueCounterContainer !== null ) {
-										let counter = parseInt( issueCounterContainer.querySelector( ".issue-number").innerHTML );
-										issueCounterContainer.querySelector( ".issue-number").innerHTML = counter - 1;
+										issueCounterContainer.querySelector( ".issue-number").innerHTML = result.issue_count;
 									}								
+								
+									// Update the score.
+									const productScoreContainer = productContainer.querySelector('.wsh-pill__score');
+									if( productScoreContainer !== null ) {
+										productScoreContainer.style.setProperty('--score', result.score );
+										productScoreContainer.innerHTML = result.score;
+									}
 								}
+								
 
 								//delete the issue
 								slowDelete(e.target.closest(".wsh-issues-table__issue"));

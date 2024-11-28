@@ -21,7 +21,16 @@ class Shop extends Controller {
 
 		$objects = ScannedObject::where( 'object_type', '!=', 'product' )
 				->whereHas( 'relevant_issues' )
-				->get();
+				->get()
+				->filter(
+					function ( $object ) {
+						return $object->issues->every(
+							function ( $issue ) {
+								return class_exists( $issue->validator_class );
+							}
+						);
+					}
+				);
 
 		\woop_view( 'general-issues', \compact( 'objects' ) )->render();
 	}
