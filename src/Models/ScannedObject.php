@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Wooping\ShopHealth\Analysers\HTML;
 use Wooping\ShopHealth\Contracts\Model;
+use Wooping\ShopHealth\Helpers\ScoreCalculator;
 
 /**
  * Class Issue
@@ -85,6 +86,28 @@ class ScannedObject extends Model {
 		// set the variable and return it, once initted.
 		$this->html_analyser = new HTML( $this->object_url );
 		return $this->html_analyser;
+	}
+
+	/**
+	 * Recalculate the score for this object
+	 */
+	public function recalculate_score(): ScannedObject {
+
+		$score = ( new ScoreCalculator() )->scanned_object( $this );
+
+		// For a product, get the relative score based on the max_score
+		if ( $this->object_type == 'product' ) {
+
+			// get total negatives, and calculate our total score against it
+			$max_scores      = \get_option( 'wooping_shop_health_max_scores', [] );
+			$total_negatives = ( $max_scores['products'] ?? 1000 );
+			$score           = ( $score / $total_negatives * 100 ); // percentage.
+		}
+
+		// score between 100-0, 100 being perfect, 0 being horrible.
+		$this->score = (int) ( 100 - $score );
+
+		return $this;
 	}
 
 	/**
