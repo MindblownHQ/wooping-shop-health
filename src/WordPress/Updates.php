@@ -111,11 +111,11 @@ class Updates implements Hookable {
 			\as_enqueue_async_action( 'woop_calculate_max_scores', [], '', true );
 		
 			// Re-save the statistics.
-			( new Options() )->save_statistics();
+			\as_enqueue_async_action( 'woop_refresh_stats', [], '', true );
 
-      return;
-
-    }
+			// Run general migration scrips 
+			\as_enqueue_async_action( 'woop_after_update', $options, '', true );
+		}
 	}
 
 	/**
