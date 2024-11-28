@@ -37,27 +37,6 @@ class ScoreCalculator {
 	}
 
 	/**
-	 * Calculate the score
-	 */
-	public function calculate( int $total, string $type ): int {
-
-		// get total negatives.
-		$scores          = \get_option( 'wooping_shop_health_max_scores', [] );
-		$total_negatives = ( $scores[ $type ] ?? 1000 );
-
-		if ( $total === 0 ) {
-			return 100;
-		}
-
-		if ( $total_negatives === 0 ) {
-			return 0;
-		}
-
-		$negatives = ( $total / $total_negatives * 100 ); // percentage.
-		return (int) ( 100 - $negatives ); // score between 100-0, 100 being perfect, 0 being horrible.
-	}
-
-	/**
 	 * Returns a total on a collection of ScannedObjects
 	 */
 	public function get_total( Collection $collection ): int {

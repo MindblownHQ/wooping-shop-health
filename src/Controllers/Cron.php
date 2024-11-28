@@ -4,11 +4,11 @@ namespace Wooping\ShopHealth\Controllers;
 
 use Wooping\ShopHealth\Contracts\Controller;
 use Wooping\ShopHealth\Helpers\Scans;
+use Wooping\ShopHealth\Models\Database\Options;
 use Wooping\ShopHealth\Queue\BatchScanProducts;
 use Wooping\ShopHealth\Queue\ScanProduct;
 use Wooping\ShopHealth\Queue\ScanSetting;
 use Wooping\ShopHealth\Validators\SettingContainer;
-use Wooping\ShopHealth\Models\Database\Options;
 use WP_REST_Response;
 
 /**

@@ -86,7 +86,7 @@ class HandleAdminRequest extends Router implements Hookable {
 	}
 
 	/**
-	 * Return wether or not this route exists
+	 * Return whether or not this route exists
 	 *
 	 * @param string $type The request type.
 	 */
