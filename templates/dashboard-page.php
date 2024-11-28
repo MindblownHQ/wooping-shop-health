@@ -32,7 +32,10 @@ $current_user = wp_get_current_user();
 						<div class="wsh-scan-control">
 							<button class="button button-primary scan-all"><?php esc_html_e( 'Scan all', 'wooping-shop-health' ); ?></button>
 							<?php if( !is_null( $last_scan ) ):?>
-								<p class="wsh-scan-control__last-scan"><?php echo esc_html( $last_scan );?></p>
+								<p class="wsh-scan-control__last-scan">
+									<?php esc_html_e( 'Last scan triggered on ', 'wooping-shop-health' );?>
+									<datetime><?php echo esc_html( $last_scan );?></datetime>
+								</p>
 							<?php endif;?>
 						</div>
 					</div>

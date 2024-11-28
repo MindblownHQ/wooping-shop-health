@@ -23,6 +23,7 @@ class SettingContainer {
 			'has_privacy_policy'        => Settings\HasPrivacyPolicy::class,
 			'has_shop_page'             => Settings\HasShopPage::class,
 			'has_terms_and_conditions'  => Settings\HasTermsAndConditions::class,
+			'has_wp_cron'				=> Settings\HasWPCron::class,
 		];
 	}
 

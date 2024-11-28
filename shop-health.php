@@ -3,7 +3,7 @@
  * Plugin Name: Wooping Shop Health
  * Plugin URI: https://wooping.io
  * Description: Shop Health is a free tool for Woocommerce that helps you increase your sales with actionable advice.
- * Version: 1.0.1
+ * Version: 1.1.0
  * Author: Wooping
  * Author URI: https://wooping.io
  * License: GPL v2 or later
@@ -26,7 +26,7 @@ use Wooping\ShopHealth\Plugin;
 
 define( 'SHOP_HEALTH_FILE', __FILE__ );
 define( 'SHOP_HEALTH_PATH', dirname( SHOP_HEALTH_FILE ) );
-define( 'SHOP_HEALTH_VERSION', '1.0.1' );
+define( 'SHOP_HEALTH_VERSION', '1.1.0' );
 define( 'SHOP_HEALTH_DOCUMENTATION_URL', 'https://wooping.io/docs/shop-health/' );
 
 if ( ! file_exists( SHOP_HEALTH_PATH . '/vendor/autoload.php' ) ) {
@@ -37,6 +37,13 @@ require SHOP_HEALTH_PATH . '/vendor/autoload.php';
 
 // Upon activation check if the data model is in order.
 register_activation_hook( SHOP_HEALTH_FILE, function() {
+
+	// @temp: prevent users from enabling this plugin on a network.
+	if( \is_network_admin() ){
+		deactivate_plugins( plugin_basename( SHOP_HEALTH_FILE ), true, true );
+		wp_die( 'This plugin cannot be activated on a multisite network.' );
+	}
+
 	( new Plugin() )->install();
 } );
 
@@ -56,7 +63,13 @@ function shop_health_plugin(): Plugin {
 	}
 
 	$plugin = new Plugin();
+
+	do_action( 'wooping_shop_health_before_boot' );
+	
 	$plugin->boot();
+
+	do_action( 'wooping_shop_health_after_boot' );
+
 	$plugin->init();
 
 	// Allow other plugins to hook into this.

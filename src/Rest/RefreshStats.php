@@ -42,7 +42,7 @@ class RefreshStats extends Rest {
 		return new WP_REST_Response(
 			[
 				'status'  => 'success',
-				'message' => \__( 'The statistics are being refreshed.', 'wooping-shop-health' ),
+				'message' => \__( 'The statistics are refreshed!', 'wooping-shop-health' ),
 				'data'    => $stats,
 			],
 			200

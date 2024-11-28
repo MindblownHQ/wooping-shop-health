@@ -120,8 +120,8 @@ class Plugin {
 		$default_port = \ini_get( 'mysqli.default_port' );
 
 		// Overwrite default port when it's set in DB_HOST
-		if ( strpos( DB_HOST, ':' ) !== false ) {
-			list( , $default_port ) = explode( ':', DB_HOST );
+		if ( \strpos( \DB_HOST, ':' ) !== false ) {
+			list( , $default_port ) = \explode( ':', \DB_HOST );
 		}
 
 		$capsule->addConnection(

@@ -20,13 +20,12 @@ class Options {
 		return $stats;
 	}
 
-
 	/**
 	 * Save a timestamp for when the queue was last updated with issues
 	 */
 	public function set_queue_timestamp(): void {
-		
-		\update_option( 'wooping_shop_health_scan_last_triggered', time() );
+
+		\update_option( 'wooping_shop_health_scan_last_triggered', \time() );
 	}
 
 	/**

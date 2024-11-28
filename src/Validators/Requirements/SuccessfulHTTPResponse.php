@@ -9,7 +9,7 @@ use Wooping\ShopHealth\Contracts\Requirement;
 /**
  * Class SuccessfulHTTPResponse
  *
- * This class checks wether or not the ScannedObjects' html analyser has
+ * This class checks whether or not the ScannedObjects' html analyser has
  * a positive http status code for us
  */
 class SuccessfulHTTPResponse extends Requirement {
