@@ -61,6 +61,7 @@ jobs:
           -x "${{ github.event.repository.name }}/phpunit.xml.dist" \
           -x "${{ github.event.repository.name }}/.phpcs.xml.dist" \
           -x "${{ github.event.repository.name }}/.travis.yml" \
+          -x "${{ github.event.repository.name }}/.config" \
           -x "${{ github.event.repository.name }}/webpack.mix.js"
 
       - name: Release
