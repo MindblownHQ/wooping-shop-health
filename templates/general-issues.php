@@ -36,7 +36,7 @@ use Wooping\ShopHealth\Models\ScannedObject;
 							<div class="wsh-issues-table__issues-container">
 								<?php
 								foreach ( $objects as $object ) {
-									foreach ( $object->issues as $issue ) { ?>
+									foreach ( $object->issues->where('status', 'open') as $issue ) { ?>
 										<div class="wsh-issues-table__description wsh-issues-table__cell">
 											<span><?php echo esc_html( $issue->message ); ?></span>
 											<?php if( ! is_null( $issue->docs_description ) ):?>
