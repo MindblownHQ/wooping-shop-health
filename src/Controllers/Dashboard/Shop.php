@@ -23,10 +23,10 @@ class Shop extends Controller {
 				->whereHas( 'relevant_issues' )
 				->get()
 				->filter(
-					function ( $object ) {
+					static function ( $object ) {
 						return $object->issues->every(
-							function ( $issue ) {
-								return class_exists( $issue->validator_class );
+							static function ( $issue ) {
+								return \class_exists( $issue->validator_class );
 							}
 						);
 					}

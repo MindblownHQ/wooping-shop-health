@@ -93,7 +93,7 @@ class Issue extends Model {
 	public function getDocsDescriptionAttribute(): ?string {
 		$validator = $this->validator_class;
 
-		if( class_exists( $validator ) ){
+		if ( \class_exists( $validator ) ) {
 			return $validator::documentation();
 		}
 

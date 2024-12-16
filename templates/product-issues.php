@@ -1,6 +1,7 @@
 <?php
 /**
  * Displays the product issie tab
+ *
  * @var ScannedObject $products ;
  * @var               $max_pages
  * @var               $current_page
@@ -17,11 +18,12 @@ use Wooping\ShopHealth\Models\ScannedObject;
 		<?php woop_template( 'components.dashboard-tabs' ); ?>
 		<section class="wsh-tabs-pane">
 			<section class="wsh-tabs-pane__content">
-				<?php 
-				if( $products->pluck('relevant_issues')->isEmpty() ){
+				<?php
+				if ( $products->pluck( 'relevant_issues' )->isEmpty() ) {
 					woop_template( 'components.empty-state' );
-				
-				} else {?>
+
+				} else {
+					?>
 				<div class="wsh-issues-table wsh-product-issues-table">
 					<header class="wsh-issues-table__header">
 						<span
@@ -32,7 +34,8 @@ use Wooping\ShopHealth\Models\ScannedObject;
 							class="wsh-issues-table__cell"><?php esc_html_e( 'Issues', 'wooping-shop-health' ); ?></span>
 					</header>
 					<?php
-					foreach ( $products as $product ) { ?>
+					foreach ( $products as $product ) {
+						?>
 						<div class="wsh-issues-table__product">
 							<figure class="wsh-issues-table__product-image">
 								<?php
@@ -44,15 +47,17 @@ use Wooping\ShopHealth\Models\ScannedObject;
 								?>
 							</figure>
 							<div class="wsh-issues-table__product-title">
-								<?php echo sprintf( '<span>%s</span>', get_the_title( $product->object_id ) ); ?>
+								<?php printf( '<span>%s</span>', get_the_title( $product->object_id ) ); ?>
 								<a href="<?php echo get_edit_post_link( $product->object_id ); ?>"><?php esc_html_e( 'Edit product', 'wooping-shop-health' ); ?></a>
 							</div>
 							<div class="wsh-issues-table__score wsh-issues-table__cell">
-								<?php echo sprintf(
+								<?php
+								printf(
 									'<span class="wsh-pill wsh-pill__score" style="--score: %1$d">%2$d</span>',
 									esc_attr( $product->score ),
 									esc_html( $product->score )
-								); ?>
+								);
+								?>
 							</div>
 							<span class="wsh-issues-table__cell" data-id="issue-count">
 								<?php
@@ -77,20 +82,20 @@ use Wooping\ShopHealth\Models\ScannedObject;
 										<div class="wsh-issues-table__issue">
 											<div class="wsh-issues-table__description">
 												<span><?php echo esc_html( $issue->message ); ?></span>
-												<?php if( ! is_null( $issue->docs_description ) ):?>
-													<a href="<?php echo \esc_attr( $issue->docs_link ); ?>" target="_blank" class="docs_link has-tooltip">
+												<?php if ( ! is_null( $issue->docs_description ) ) : ?>
+													<a href="<?php echo esc_attr( $issue->docs_link ); ?>" target="_blank" class="docs_link has-tooltip">
 														<span class="dashicons dashicons-welcome-learn-more"></span>
 														<span><?php echo __( 'Learn more', 'wooping-shop-health' ); ?></span>
 														<span class="tooltip">
 															<?php echo esc_html( $issue->docs_description ); ?>
 														</span>
 													</a>
-												<?php endif;?>
+												<?php endif; ?>
 											</div>
 											<time datetime="<?php echo $issue->created_at->format( 'c' ); ?>" class="reported_on wsh-issues-table__cell"><?php echo $issue->created_at->format( 'd M Y' ); ?></time>
 
 											<button class="button wsh-button wsh-button--ghost ignore-issue-btn"
-													data-issue-id="<?php echo \absint( $issue->id ); ?>">
+													data-issue-id="<?php echo absint( $issue->id ); ?>">
 												<?php esc_html_e( 'Ignore issue', 'wooping-shop-health' ); ?>
 											</button>
 										</div>
@@ -100,13 +105,13 @@ use Wooping\ShopHealth\Models\ScannedObject;
 						</div>
 					<?php } ?>
 				</div>
-				<?php }?>
+				<?php } ?>
 			</section>
 			<!-- pagination: -->
-			<?php if( !empty( $products ) && $max_pages > 1 ):?>
+			<?php if ( ! empty( $products ) && $max_pages > 1 ) : ?>
 			<nav class="wsh-pagination">
 				<?php
-				$baseurl = \woop_get_route( 'product_issues' );
+				$baseurl = woop_get_route( 'product_issues' );
 				for ( $i = 1; $i <= $max_pages; $i++ ) {
 
 					if ( $i == $current_page ) {
@@ -118,7 +123,7 @@ use Wooping\ShopHealth\Models\ScannedObject;
 				}
 				?>
 			</nav>
-			<?php endif;?>
+			<?php endif; ?>
 		</section>
 	</section>
 </div>

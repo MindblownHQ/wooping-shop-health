@@ -58,7 +58,7 @@ class Statistics {
 				'text'       => ( ( $returning['diff'] > 0 ) ? '+' : '' ) . $returning['diff'],
 				'addendum'   => ( $returning['diff'] >= 0 ) ? \__( 'increase', 'wooping-shop-health' ) : \__( 'decrease', 'wooping-shop-health' ),
 				'diff'       => $returning['diff'],
-				'total'      => \round($data['returning_customers'], 2),
+				'total'      => \round( $data['returning_customers'], 2 ),
 				'id'         => 'returning',
 			],
 			'revenue'   => [

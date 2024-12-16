@@ -17,10 +17,9 @@ class ManagePluginActions implements Hookable {
 	 * Registers the hooks for the menu items in the admin menu.
 	 */
 	public function register_hooks(): void {
-		
+
 		// Add settings link.
 		\add_action( 'plugin_action_links_' . \plugin_basename( \SHOP_HEALTH_FILE ), [ $this, 'add_settings_link' ], 100 );
-
 	}
 
 	/**
@@ -36,5 +35,4 @@ class ManagePluginActions implements Hookable {
 
 		return $links;
 	}
-
 }

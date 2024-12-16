@@ -5,7 +5,6 @@ namespace Wooping\ShopHealth\WordPress;
 use Throwable;
 use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
 use WP_Upgrader;
-use Wooping\ShopHealth\Models\Database\Options;
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 /**
@@ -109,11 +108,11 @@ class Updates implements Hookable {
 		if ( $this->verify_update_is_ours( $options ) ) {
 			// Schedule the max-score calculation.
 			\as_enqueue_async_action( 'woop_calculate_max_scores', [], '', true );
-		
+
 			// Re-save the statistics.
 			\as_enqueue_async_action( 'woop_refresh_stats', [], '', true );
 
-			// Run general migration scrips 
+			// Run general migration scrips
 			\as_enqueue_async_action( 'woop_after_update', $options, '', true );
 		}
 	}
