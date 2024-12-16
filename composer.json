@@ -41,6 +41,12 @@
   "scripts": {
     "analyse": "vendor/bin/phpstan analyse src --memory-limit 1G",
     "check-cs": "vendor/bin/phpcs --config-set php_version 7040 && ./vendor/bin/phpcs src/ assets/src/ templates/",
-    "fix-cs": "vendor/bin/phpcbf --config-set php_version 7040 && ./vendor/bin/phpcbf src/ assets/src/ templates/"
+    "fix-cs": "vendor/bin/phpcbf --config-set php_version 7040 && ./vendor/bin/phpcbf src/ assets/src/ templates/",
+    "post-install-cmd": [
+      "./.config/setup.sh"
+    ],
+    "post-update-cmd": [
+      "./.config/setup.sh"
+    ]
   }
 }
