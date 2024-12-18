@@ -7,9 +7,9 @@ if ( $object->relevant_issues->isEmpty() ) {
 <div class="wsh-issues-table wsh-product-issues-table">
 <div class="wsh-issues-table__issues-container wsh-product-issues-table">
     <header>
-        <span class="">Description</span>
-        <span class="">First seen</span>
-        <span class="">Actions</span>
+        <span class="wsh-issues__description"><?php echo esc_html__( 'Description', 'wooping-shop-health' );?></span>
+        <span class="wsh-issues__first-seen"><?php echo esc_html__( 'First seen', 'wooping-shop-health' );?></span>
+        <span class="wsh-issues__actions"><?php echo esc_html__( 'Actions', 'wooping-shop-health' );?></span>
     </header>
     <div class="wsh-issues-table__issues">
 		<?php foreach ( $object->relevant_issues as $issue ) { ?>
@@ -22,15 +22,15 @@ if ( $object->relevant_issues->isEmpty() ) {
                         <span><?php echo __( 'Learn more', 'wooping-shop-health' ); ?></span>
 						<?php if ( ! is_null( $issue->docs_description ) ): ?>
                             <span class="tooltip">
-															<?php echo $issue->docs_description; ?>
-														</span>
+								<?php echo $issue->docs_description; ?>
+							</span>
 						<?php endif; ?>
                     </a>
                 </div>
 				<time datetime="<?php echo $issue->created_at->format( 'c' ); ?>" class="reported_on wsh-issues-table__cell"><?php echo $issue->created_at->format( 'd M Y' ); ?></time>
                 <button class="button wsh-button wsh-button--ghost ignore-issue-btn"
                         data-issue-id="<?php echo \absint( $issue->id ); ?>">
-                    Ignore issue
+                    <?php echo esc_html__( 'Ignore issue', 'wooping-shop-health' );?>
                 </button>
             </div>
 		<?php } ?>

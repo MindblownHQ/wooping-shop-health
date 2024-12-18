@@ -110,6 +110,27 @@ class ScannedObject extends Model {
 		return $this;
 	}
 
+
+	/**
+	 * Returns the thumbnail of the post associated with
+	 * this Scanned Object 
+	 *
+	 * @return string|null
+	 */
+	public function thumbnail(): string {
+		
+		if( is_null( $this->object_id ) ){
+			return '';
+		}
+
+		$thumbnail = get_the_post_thumbnail( $this->object_id, 'thumbnail' );
+		if ( empty( $thumbnail ) ) {
+			return wc_placeholder_img( 'thumbnail' );
+		}
+
+		return $thumbnail;
+	}
+
 	/**
 	 * Magic method to create the object_url class variable.
 	 */
@@ -122,6 +143,7 @@ class ScannedObject extends Model {
 		// return null for now, but maybe expand this later for certain settings like the cart-page.
 		return null;
 	}
+
 
 	/**
 	 * Query scope for products
