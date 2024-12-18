@@ -54,6 +54,11 @@ class ScanSetting extends ValidationQueueable {
 			$scanned_object->save();
 		}
 
+		// Quit early if validator does not exist.
+		if ( ! \class_exists( $setting ) ) {
+			return;
+		}
+
 		$instance = new $setting( \WC(), $scanned_object );
 
 		// we have a failed test.
