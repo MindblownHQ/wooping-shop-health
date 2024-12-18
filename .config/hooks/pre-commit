@@ -1,0 +1,4 @@
+#!/bin/sh
+
+composer fix-cs
+composer check-cs
