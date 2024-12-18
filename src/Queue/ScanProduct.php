@@ -70,7 +70,6 @@ class ScanProduct extends ValidationQueueable {
 		// @var ProductValidator $validator ProductValidator instance for IDE click-troughs.
 		foreach ( $validators as $validator ) {
 
-			// Check if the class exists.
 			if ( ! \class_exists( $validator ) ) {
 				continue;
 			}

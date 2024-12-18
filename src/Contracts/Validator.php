@@ -54,10 +54,6 @@ abstract class Validator {
 		// loop through all requirements.
 		foreach ( static::REQUIREMENTS as $requirement ) {
 
-			if ( ! \class_exists( $requirement ) ) {
-				return true;
-			}
-
 			// turn them into an instance and see if they pass.
 			$instance = new $requirement( $this );
 			if ( ! $instance->passes() ) {
