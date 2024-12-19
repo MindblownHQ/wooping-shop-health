@@ -40,7 +40,7 @@ class Plugin {
 		( new Migrations() )->run();
 
 		// Save a copy of the stats.
-		$options = ( new Options() )->save_statistics();
+		( new Options() )->save_statistics();
 
 		// Schedule a max_scores calculation.
 		if ( \function_exists( 'as_enqueue_async_action' ) ) {
