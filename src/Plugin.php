@@ -40,7 +40,7 @@ class Plugin {
 		( new Migrations() )->run();
 
 		// Save a copy of the stats.
-		( new Options() )->save_statistics();
+		$options = ( new Options() )->save_statistics();
 
 		// Schedule a max_scores calculation.
 		if ( \function_exists( 'as_enqueue_async_action' ) ) {
@@ -99,6 +99,8 @@ class Plugin {
 
 		// ShopHealth hooks.
 		( new Updates() )->register_hooks();
+
+		( new Options )->version_number();
 
 		// If we're in WP CLI mode, enable commands.
 		if ( \defined( 'WP_CLI' ) && \WP_CLI ) {
