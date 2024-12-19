@@ -10,6 +10,11 @@ use Wooping\ShopHealth\Helpers\Statistics;
 class Options {
 
 	/**
+	 * The group name under which the options are stored.
+	 */
+	protected string $group_name = 'wooping_shop_health';
+
+	/**
 	 * Save the statistics for the dashboard page
 	 */
 	public function save_statistics(): array {
@@ -46,5 +51,24 @@ class Options {
 		foreach ( $options as $option ) {
 			\delete_option( $option );
 		}
+	}
+
+	/**
+	 * A temporary method to save a version number.
+	 * We will need this for future update routines.
+	 *
+	 * Should be replaced when a decent Option class and update routine are in place.
+	 *
+	 * @since 1.2
+	 */
+	public function version_number() {
+		$options = get_option( $this->group_name );
+
+		if( ! isset( $options['version'] ) ) {
+			$options['version'] = SHOP_HEALTH_VERSION;
+			update_option( $this->group_name, $options );
+		}
+
+		return $options['version'];
 	}
 }

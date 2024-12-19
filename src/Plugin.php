@@ -102,6 +102,8 @@ class Plugin {
 		// ShopHealth hooks.
 		( new Updates() )->register_hooks();
 
+		( new Options )->version_number();
+
 		// If we're in WP CLI mode, enable commands.
 		if ( \defined( 'WP_CLI' ) && \WP_CLI ) {
 			WP_CLI::add_command( 'shop-health schedule', ScheduleCommands::class );
