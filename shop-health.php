@@ -26,7 +26,7 @@ use Wooping\ShopHealth\Plugin;
 
 define( 'SHOP_HEALTH_FILE', __FILE__ );
 define( 'SHOP_HEALTH_PATH', dirname( SHOP_HEALTH_FILE ) );
-define( 'SHOP_HEALTH_VERSION', '1.1.0' );
+define( 'SHOP_HEALTH_VERSION', '1.2.0' );
 define( 'SHOP_HEALTH_DOCUMENTATION_URL', 'https://wooping.io/docs/shop-health/' );
 
 if ( ! file_exists( SHOP_HEALTH_PATH . '/vendor/autoload.php' ) ) {
