@@ -15,6 +15,7 @@ use Wooping\ShopHealth\Rest\ScanProgress;
 use Wooping\ShopHealth\Rest\ScanShop;
 use Wooping\ShopHealth\Rest\UpdateIssueStatus;
 use Wooping\ShopHealth\WooCommerce\Admin\Products;
+use Wooping\ShopHealth\WooCommerce\Admin\Settings;
 use Wooping\ShopHealth\WooCommerce\Compatibility;
 use Wooping\ShopHealth\WordPress\Assets;
 use Wooping\ShopHealth\WordPress\HandleAdminRequest;
@@ -96,9 +97,12 @@ class Plugin {
 		// WooCommerce hooks.
 		( new Compatibility() )->register_hooks();
 		( new Products() )->register_hooks();
+		( new Settings() )->register_hooks();
 
 		// ShopHealth hooks.
 		( new Updates() )->register_hooks();
+
+		( new Options )->version_number();
 
 		// If we're in WP CLI mode, enable commands.
 		if ( \defined( 'WP_CLI' ) && \WP_CLI ) {
@@ -121,7 +125,7 @@ class Plugin {
 
 		// Overwrite default port when it's set in DB_HOST
 		if ( \strpos( \DB_HOST, ':' ) !== false ) {
-			list( , $default_port ) = \explode( ':', \DB_HOST );
+			[ , $default_port ] = \explode( ':', \DB_HOST );
 		}
 
 		$capsule->addConnection(
