@@ -52,7 +52,7 @@ abstract class Validator {
 	public function can_run(): bool {
 
 		// loop through all requirements.
-		foreach ( static::REQUIREMENTS as $requirement ) {
+		foreach ( $this->requirements() as $requirement ) {
 
 			// turn them into an instance and see if they pass.
 			$instance = new $requirement( $this );
@@ -65,11 +65,29 @@ abstract class Validator {
 		return true;
 	}
 
+
+	/**
+	 * Returns the requirements for this validator. 
+	 */
+	public function requirements(): array {
+		
+		// Retrieve the slug
+		$slug = $this->get_validator_slug();
+		
+		// This turns into 'wooping/validators/has_category/requirements'.
+		return apply_filters( "wooping/validators/$slug/requirements", static::REQUIREMENTS );
+	}
+
 	/**
 	 * Returns the severity. Defaults to the constant at the top of this class.
 	 */
 	protected function severity(): int {
-		return static::SEVERITY;
+
+		// Retrieve the slug
+		$slug = $this->get_validator_slug();
+		
+		// This turns into 'wooping/validators/has_category/severity'.
+		return apply_filters( "wooping/validators/$slug/severity", static::SEVERITY );
 	}
 
 	/**
@@ -77,6 +95,19 @@ abstract class Validator {
 	 */
 	public function get_validator_short_name(): string {
 		return ( new ReflectionClass( static::class ) )->getShortName();
+	}
+
+	/**
+	 * Returns the validator's short_name as a snake-case string.
+	 */
+	public function get_validator_slug(): string {
+		return strtolower( 
+			preg_replace(
+				'/([a-z])([A-Z])/', 
+				'$1_$2', 
+				$this->get_validator_short_name() 
+			) 
+		);
 	}
 
 	/**
@@ -104,8 +135,12 @@ abstract class Validator {
 		// find the issue for this validator.
 		$issue = $this->find_issue();
 
+		// Allow plugin develors to check if this validator can be resolved. Defaults to yes.
+		$slug = $this->get_validator_slug();
+		$can_be_resolved = apply_filters( "wooping/validators/$slug/can_be_resolved", true, $this );
+
 		// mark issue as resolved, if it exists.
-		if ( ! \is_null( $issue ) ) {
+		if ( ! \is_null( $issue ) && $can_be_resolved ) {
 
 			$issue->status = 'resolved';
 			$issue->save();

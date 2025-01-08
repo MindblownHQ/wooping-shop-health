@@ -62,6 +62,6 @@ if ( ! function_exists( 'wooping_get_routes' ) ) {
 		];
 
 		// add a filter for other plugins and return the routes.
-		return apply_filters( 'wooping_routes', $routes );
+		return apply_filters( 'wooping/global/routes', $routes );
 	}
 }

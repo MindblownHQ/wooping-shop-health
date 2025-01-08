@@ -43,7 +43,7 @@ class Assets implements Hookable {
 			'shopHealth',
 			[
 				'currencySymbol' => \get_woocommerce_currency_symbol(),
-				'api_url'        => \apply_filters( 'wooping_api_url', 'https://wooping.io/wp-json/wooping/v1' ),
+				'api_url'        => \apply_filters( 'wooping/global/api_url', 'https://wooping.io/wp-json/wooping/v1' ),
 			]
 		);
 		\wp_enqueue_script( 'wooping_shop_health_js' );
