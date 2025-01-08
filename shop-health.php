@@ -37,13 +37,6 @@ require SHOP_HEALTH_PATH . '/vendor/autoload.php';
 
 // Upon activation check if the data model is in order.
 register_activation_hook( SHOP_HEALTH_FILE, function() {
-
-	// @temp: prevent users from enabling this plugin on a network.
-	if( \is_network_admin() ){
-		deactivate_plugins( plugin_basename( SHOP_HEALTH_FILE ), true, true );
-		wp_die( 'This plugin cannot be activated on a multisite network.' );
-	}
-
 	( new Plugin() )->install();
 } );
 

@@ -19,11 +19,21 @@ class Migrations {
 
 		// Get the migrations and loop through them.
 		$migrations = $this->get_migrations();
-		foreach ( $migrations as $migration ) {
+		$sites = $this->get_sites();
 
-			// Only create the tables that don't exist.
-			if ( $migration->exists() === false ) {
-				$migration->run();
+		foreach( $sites as $site ){
+
+			// Switch to another site to run these migrations.
+			if( !is_null( $site ) ){
+				\switch_to_blog( \absint( $site ) );
+			}
+
+			foreach ( $migrations as $migration ) {
+
+				// Only create the tables that don't exist.
+				if ( $migration->exists() === false ) {
+					$migration->run();
+				}
 			}
 		}
 	}
@@ -35,13 +45,22 @@ class Migrations {
 
 		// Get the migrations and loop through them.
 		$migrations = $this->get_migrations();
+		$sites = $this->get_sites();
+		
+		foreach( $sites as $site ){
 
-		// Reverse the migrations array, because roll-backs happen in the reverse order.
-		foreach ( \array_reverse( $migrations ) as $migration ) {
+			// Switch to another site to run these migrations.
+			if( !is_null( $site ) ){
+				\switch_to_blog( \absint( $site ) );
+			}
 
-			// Only delete the tables if they exist.
-			if ( $migration->exists() === true ) {
-				$migration->roll_back();
+			// Reverse the migrations array, because roll-backs happen in the reverse order.
+			foreach ( \array_reverse( $migrations ) as $migration ) {
+
+				// Only delete the tables if they exist.
+				if ( $migration->exists() === true ) {
+					$migration->roll_back();
+				}
 			}
 		}
 	}
@@ -57,5 +76,26 @@ class Migrations {
 			new AddScannedObjectsTable(),
 			new AddIssuesTable(),
 		];
+	}
+
+
+	/**
+	 * If we're dealing with a multisite, this function provides an array of blog_ids to run this migration for.,
+	 */
+	public function get_sites(): array {
+		
+		if( \is_multisite() ){
+
+			$response = [];
+			foreach( \get_sites() as $site ){
+				$response[] = $site->blog_id;
+			}
+
+			return $response;
+		}
+
+		// Default to an array with null, so we can still loop through it.
+		return [ null ];
+		
 	}
 }
