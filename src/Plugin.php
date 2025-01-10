@@ -80,6 +80,11 @@ class Plugin {
 	 */
 	public function init(): void {
 
+		// Check if updates should be run
+		if ( version_compare( Options::get( 'version' ), SHOP_HEALTH_VERSION, '<' ) ) {
+			( new \Wooping\ShopHealth\Updates\Updates() )->run_updates();
+		}
+
 		// General WordPress hooks.
 		( new Assets() )->register_hooks();
 		( new RegisterPages() )->register_hooks();

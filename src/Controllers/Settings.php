@@ -3,6 +3,7 @@
 namespace Wooping\ShopHealth\Controllers;
 
 use Wooping\ShopHealth\Contracts\Controller;
+use Wooping\ShopHealth\Models\Database\Options;
 
 /**
  * Class IssuesController
@@ -40,7 +41,7 @@ class Settings extends Controller {
 		if ( isset( $_POST['ignored_validators'] ) && \is_array( $_POST['ignored_validators'] ) ) { // phpcs:ignore
 
 			// get the old ignored validators.
-			$old_ignored_validators = \get_option( 'wooping_shop_health_ignored_validators', [] );
+			$old_ignored_validators = Options::get( 'ignored_validators' ) ?? [];
 
 			// sanitize value. ignored_validators are sanitized, but as text.
 			$validators = [];
@@ -49,7 +50,7 @@ class Settings extends Controller {
 			}
 
 			// update the option.
-			\update_option( 'wooping_shop_health_ignored_validators', $validators );
+			Options::set( 'ignored_validators', $validators );
 
 			// and trigger a bulk-ignore check.
 			\as_enqueue_async_action(
@@ -64,7 +65,7 @@ class Settings extends Controller {
 
 		}else {
 			// update the option with an empty array as default.
-			\update_option( 'wooping_shop_health_ignored_validators', [] );
+			Options::set( 'ignored_validators', [] );
 		}
 
 		// return back to the settings page.
