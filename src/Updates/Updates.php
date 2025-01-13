@@ -22,11 +22,11 @@ class Updates {
 	 * Run defined update routines.
 	 */
 	public function run_updates(): void {
-		foreach ( $this->update_routines as $version ) {
+		foreach ( $this->update_routines as $version => $callback) {
 			// Check if a update routine has a higher version number than the one currently stored in the database.
 			// If so: we need to run this routine.
 			if ( version_compare( Options::get( 'version' ), $version, '<' ) ) {
-				call_user_func( [ $this, 'update_' . $version ] );
+				call_user_func( [ $this, 'update_' . $callback ] );
 			}
 		}
 
