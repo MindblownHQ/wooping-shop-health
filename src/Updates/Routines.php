@@ -34,9 +34,15 @@ class Routines {
 		// After all update routines are done, update the version in the database
 		Options::set( 'version', SHOP_HEALTH_VERSION );
 
+		$new_version = Options::get( 'version' );
 
-		// Provide the ability to hook into
-		do_action( 'wooping/shop-health/after_update_routines', $old_version, Options::get( 'version' ) );
+		/**
+		 * This action fires after the update process is completed.
+		 *
+		 * @var string $old_version The previous version of the plugin.
+		 * @var string $new_version The new (current) version of the plugin.
+		 */
+		do_action( 'wooping/shop-health/after_update_routines', $old_version, $new_version );
 	}
 
 	/**
