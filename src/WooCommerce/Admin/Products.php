@@ -28,7 +28,7 @@ class Products implements Hookable {
 		\add_action( 'manage_product_posts_custom_column', [ $this, 'product_health' ], 10, 2 );
 		\add_action( 'add_meta_boxes', [ $this, 'add_health_meta_box' ], 10 );
 		\add_action( 'wp_trash_post', [ $this, 'delete_scanned_object' ], 10 );
-		\add_action( 'wp_delete_post', [ $this, 'delete_scanned_object' ], 10 );
+		\add_action( 'delete_post', [ $this, 'delete_scanned_object' ], 10 );
 		\add_action( 'woocommerce_update_product', [ $this, 'scan_after_save' ], 10, 2 );
 		\add_action( 'post_submitbox_misc_actions', [ $this, 'show_product_score' ] );
 	}
