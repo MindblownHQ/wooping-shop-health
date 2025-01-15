@@ -1,11 +1,10 @@
 <?php
 
-namespace Wooping\ShopHealth\WordPress;
+namespace Wooping\ShopHealth\Updates;
 
 use Throwable;
 use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
 use WP_Upgrader;
-use Wooping\ShopHealth\Models\Database\Options;
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 /**
@@ -13,7 +12,7 @@ use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
  *
  * This class handles updates for this plugin.
  */
-class Updates implements Hookable {
+class Updater implements Hookable {
 
 	/**
 	 * The url constants with which we communicate to the world outside.

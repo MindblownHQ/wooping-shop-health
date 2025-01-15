@@ -7,8 +7,7 @@ namespace Wooping\ShopHealth\Updates;
 
 use Wooping\ShopHealth\Models\Database\Options;
 
-class Updates {
-	protected Options $options;
+class Routines {
 
 	/**
 	 * An array of version numbers with their corresponding update routines.
@@ -30,15 +29,22 @@ class Updates {
 			}
 		}
 
+		$old_version = Options::get( 'version' );
+
 		// After all update routines are done, update the version in the database
 		Options::set( 'version', SHOP_HEALTH_VERSION );
 
 
 		// Provide the ability to hook into
-		do_action( 'wooping/shop-health/after_update_routines', Options::get( 'version' ) );
+		do_action( 'wooping/shop-health/after_update_routines', $old_version, Options::get( 'version' ) );
 	}
 
-	protected function update_130() {
+	/**
+	 * Update routine for version 1.3.0.
+	 *
+	 * Handles updating of prefixed options to a single option in the WordPress option table.
+	 */
+	protected function update_130(): void {
 		$old_options = [
 			'wooping_shop_health_ignored_validators',
 			'wooping_shop_health_scan_last_triggered',
