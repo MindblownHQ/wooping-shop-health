@@ -32,6 +32,10 @@ if ( ! file_exists( SHOP_HEALTH_PATH . '/vendor/autoload.php' ) ) {
 	return;
 }
 
+if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+	return;
+}
+
 require SHOP_HEALTH_PATH . '/vendor/autoload.php';
 
 // Upon activation check if the data model is in order.
