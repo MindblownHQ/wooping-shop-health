@@ -38,20 +38,20 @@ class Register {
 	public function register_recurring(): void {
 		if ( \function_exists( 'as_has_scheduled_action' ) && \function_exists( 'as_schedule_recurring_action' ) ) {
 			// daily check if our updates are out of date.
-			if ( \as_has_scheduled_action( 'woop_update_issues' ) === false ) {
+			if ( \as_has_scheduled_action( 'wooping/shop-health/update_issues' ) === false ) {
 				\as_schedule_recurring_action(
 					\time(),
 					\DAY_IN_SECONDS,
-					'woop_update_issues'
+					'wooping/shop-health/update_issues'
 				);
 			}
 
 			// Refresh statistics.
-			if ( \as_has_scheduled_action( 'woop_refresh_stats' ) === false ) {
+			if ( \as_has_scheduled_action( 'wooping/shop-health/refresh_stats' ) === false ) {
 				\as_schedule_recurring_action(
 					\time(),
 					\HOUR_IN_SECONDS,
-					'woop_refresh_stats'
+					'wooping/shop-health/refresh_stats'
 				);
 			}
 		}

@@ -16,7 +16,7 @@ class ScanSetting extends ValidationQueueable {
 	/**
 	 * Hook on which this job runs.
 	 */
-	protected string $hook = 'woop_scan_setting';
+	protected string $hook = 'wooping/shop-health/setting/scan';
 
 	/**
 	 * All Action Scheduler async actions should be assigned to a group.

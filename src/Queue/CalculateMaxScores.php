@@ -14,7 +14,7 @@ class CalculateMaxScores extends Queueable {
 	/**
 	 * Hook on which this job runs
 	 */
-	protected string $hook = 'woop_calculate_max_scores';
+	protected string $hook = 'wooping/shop-health/calculate_max_scores';
 
 	/**
 	 * This job updates issues and makes them more important as they grow older

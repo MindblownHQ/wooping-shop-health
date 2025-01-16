@@ -16,7 +16,7 @@ class BatchScanProducts extends Queueable {
 	/**
 	 * Cronjob hook on which this job runs
 	 */
-	protected string $hook = 'woop_batch_scan_products';
+	protected string $hook = 'wooping/shop-health/product/batch_scan';
 
 	/**
 	 * Schedule a task in the action scheduler to schedule a batch of products.

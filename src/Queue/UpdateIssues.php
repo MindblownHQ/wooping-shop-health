@@ -16,7 +16,7 @@ class UpdateIssues extends Queueable {
 	/**
 	 * Hook on which this job runs
 	 */
-	protected string $hook = 'woop_update_issues';
+	protected string $hook = 'wooping/shop-health/update_issues';
 
 	/**
 	 * This job updates issues and makes them more important as they grow older

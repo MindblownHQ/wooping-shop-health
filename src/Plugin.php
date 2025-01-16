@@ -45,7 +45,7 @@ class Plugin {
 
 		// Schedule a max_scores calculation.
 		if ( \function_exists( 'as_enqueue_async_action' ) ) {
-			\as_enqueue_async_action( 'woop_calculate_max_scores', [], '', true );
+			\as_enqueue_async_action( 'wooping/shop-health/calculate_max_scores', [], '', true );
 		}
 
 		// Log the activation.
