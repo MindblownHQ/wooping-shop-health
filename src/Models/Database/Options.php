@@ -83,6 +83,6 @@ class Options {
 
 		$options[ $key ] = $value;
 
-		\update_option( self::$group_name, $options );
+		return \update_option( self::$group_name, $options );
 	}
 }
