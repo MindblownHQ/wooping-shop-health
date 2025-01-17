@@ -42,7 +42,7 @@ class Routines {
 		 * @var string $old_version The previous version of the plugin.
 		 * @var string $new_version The new (current) version of the plugin.
 		 */
-		do_action( 'wooping/shop-health/after_update_routines', $old_version, $new_version );
+		\do_action( 'wooping/shop-health/after_update_routines', $old_version, $new_version );
 	}
 
 	/**
@@ -59,8 +59,13 @@ class Routines {
 		];
 
 		foreach( $old_options as $old_option ) {
-			$new_option_name = str_replace( 'wooping_shop_health_', '', $old_option );
-			Options::set( $new_option_name, get_option( $old_option, '' ) );
+			$new_option_name = \str_replace( 'wooping_shop_health_', '', $old_option );
+			$success = Options::set( $new_option_name, \get_option( $old_option, '' ) );
+
+			// If the option was moved successfully, remove the old one.
+			if( $success ) {
+				\delete_option( $old_option );
+			}
 		}
 	}
 }
