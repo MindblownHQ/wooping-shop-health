@@ -21,18 +21,18 @@ class Routines {
 	 * Run defined update routines.
 	 */
 	public function run_updates(): void {
-		foreach ( $this->update_routines as $version => $callback) {
+		foreach ( $this->update_routines as $version => $callback ) {
 			// Check if a update routine has a higher version number than the one currently stored in the database.
 			// If so: we need to run this routine.
-			if ( version_compare( Options::get( 'version' ), $version, '<' ) ) {
-				call_user_func( [ $this, 'update_' . $callback ] );
+			if ( \version_compare( Options::get( 'version' ), $version, '<' ) ) {
+				\call_user_func( [ $this, 'update_' . $callback ] );
 			}
 		}
 
 		$old_version = Options::get( 'version' );
 
 		// After all update routines are done, update the version in the database
-		Options::set( 'version', SHOP_HEALTH_VERSION );
+		Options::set( 'version', \SHOP_HEALTH_VERSION );
 
 		$new_version = Options::get( 'version' );
 
@@ -58,12 +58,12 @@ class Routines {
 			'wooping_shop_health_max_scores',
 		];
 
-		foreach( $old_options as $old_option ) {
+		foreach ( $old_options as $old_option ) {
 			$new_option_name = \str_replace( 'wooping_shop_health_', '', $old_option );
-			$success = Options::set( $new_option_name, \get_option( $old_option, '' ) );
+			$success         = Options::set( $new_option_name, \get_option( $old_option, '' ) );
 
 			// If the option was moved successfully, remove the old one.
-			if( $success ) {
+			if ( $success ) {
 				\delete_option( $old_option );
 			}
 		}

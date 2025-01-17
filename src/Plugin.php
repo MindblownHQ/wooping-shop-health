@@ -82,7 +82,7 @@ class Plugin {
 	public function init(): void {
 
 		// Check if updates should be run
-		if ( version_compare( Options::get( 'version' ), SHOP_HEALTH_VERSION, '<' ) ) {
+		if ( \version_compare( Options::get( 'version' ), \SHOP_HEALTH_VERSION, '<' ) ) {
 			( new Routines() )->run_updates();
 		}
 
@@ -108,7 +108,7 @@ class Plugin {
 		// ShopHealth hooks.
 		( new Updater() )->register_hooks();
 
-		( new Options )->version_number();
+		( new Options() )->version_number();
 
 		// If we're in WP CLI mode, enable commands.
 		if ( \defined( 'WP_CLI' ) && \WP_CLI ) {
