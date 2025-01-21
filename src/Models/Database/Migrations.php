@@ -84,7 +84,8 @@ class Migrations {
 	 */
 	public function get_sites(): array {
 		
-		if( \is_multisite() ){
+		// Only respond with an array of site ids if we're in the network admin.
+		if( \is_multisite() && \is_network_admin() ){
 
 			$response = [];
 			foreach( \get_sites() as $site ){
