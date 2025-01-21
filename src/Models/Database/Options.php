@@ -20,7 +20,7 @@ class Options {
 	public function save_statistics(): array {
 
 		$stats = ( new Statistics() )->get();
-		self::set( 'health_statistics', $stats );
+		self::set( 'statistics', $stats );
 
 		return $stats;
 	}
