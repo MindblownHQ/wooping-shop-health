@@ -15,7 +15,7 @@ class CheckBulkIgnoredValidators extends Queueable {
 	/**
 	 * Hook on which this job runs
 	 */
-	protected string $hook = 'woop_check_bulk_ignored_validators';
+	protected string $hook = 'wooping/shop-health/check_bulk_ignored_validators';
 
 	/**
 	 * This job updates issues and makes them more important as they grow older

@@ -1,5 +1,5 @@
 <?php
-$tabs = apply_filters('wooping_settings_tabs', [
+$tabs = apply_filters( 'wooping/settings/tabs', [
 	'settings' => esc_html__( 'Ignored issues', 'wooping-shop-health' ),
 ]);
 ?>

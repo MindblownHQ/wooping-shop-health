@@ -18,7 +18,7 @@ class ScanProduct extends ValidationQueueable {
 	/**
 	 * Cronjob hook on which this job runs
 	 */
-	protected string $hook = 'woop_scan_product';
+	protected string $hook = 'wooping/shop-health/product/scan';
 
 	/**
 	 * All Action Scheduler async actions should be assigned to a group.

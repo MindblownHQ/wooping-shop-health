@@ -67,16 +67,16 @@ function shop_health_plugin(): Plugin {
 
 	$plugin = new Plugin();
 
-	do_action( 'wooping_shop_health_before_boot' );
+	do_action( 'wooping/shop-health/before_boot' );
 	
 	$plugin->boot();
 
-	do_action( 'wooping_shop_health_after_boot' );
+	do_action( 'wooping/shop-health/after_boot' );
 
 	$plugin->init();
 
 	// Allow other plugins to hook into this.
-	do_action( 'wooping_shop_health_loaded' );
+	do_action( 'wooping/shop-health/ready' );
 
 	return $plugin;
 }

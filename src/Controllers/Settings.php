@@ -54,7 +54,7 @@ class Settings extends Controller {
 
 			// and trigger a bulk-ignore check.
 			\as_enqueue_async_action(
-				'woop_check_bulk_ignored_validators',
+				'wooping/shop-health/check_bulk_ignored_validators',
 				[
 					'old' => $old_ignored_validators,
 					'new' => $validators,

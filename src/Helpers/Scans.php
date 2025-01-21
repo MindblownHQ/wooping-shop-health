@@ -20,7 +20,7 @@ class Scans {
 		// see if we have batches to query.
 		$batches = \as_get_scheduled_actions(
 			[
-				'hook'          => 'woop_batch_scan_products',
+				'hook'          => 'wooping/shop-health/product/batch_scan',
 				'per_page'      => -1,
 				'status'        => ActionScheduler_Store::STATUS_PENDING,
 			]
@@ -36,7 +36,7 @@ class Scans {
 		if ( \count( $batches ) === 0 ) {
 			$product_scans = \as_get_scheduled_actions(
 				[
-					'hook'          => 'woop_scan_product',
+					'hook'          => 'wooping/shop-health/product/scan',
 					'per_page'      => -1,
 					'status'        => ActionScheduler_Store::STATUS_PENDING,
 				]
@@ -56,7 +56,7 @@ class Scans {
 	public static function get_last_scan(): ?string {
 		$actions = \as_get_scheduled_actions(
 			[
-				'hook'     => 'woop_batch_scan_products',
+				'hook'     => 'wooping/shop-health/product/batch_scan',
 				'status'   => ActionScheduler_Store::STATUS_COMPLETE,
 				'per_page' => 1,
 				'orderby'  => 'date',

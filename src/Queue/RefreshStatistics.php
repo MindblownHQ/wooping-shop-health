@@ -15,7 +15,7 @@ class RefreshStatistics extends Queueable {
 	/**
 	 * Hook on which this job runs
 	 */
-	protected string $hook = 'woop_refresh_stats';
+	protected string $hook = 'wooping/shop-health/refresh_stats';
 
 	/**
 	 * This job updates issues and makes them more important as they grow older

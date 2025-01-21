@@ -41,8 +41,8 @@ class Cron extends Controller {
 		( new Options() )->set_queue_timestamp();
 
 		// Remove any of the old product scans in the old queue
-		\as_unschedule_all_actions( 'woop_batch_scan_products' );
-		\as_unschedule_all_actions( 'woop_scan_product' );
+		\as_unschedule_all_actions( 'wooping/shop-health/product/batch_scan' );
+		\as_unschedule_all_actions( 'wooping/shop-health/product/scan' );
 
 		// query all products.
 		$product_amount = Scans::get_total_product_amount();
