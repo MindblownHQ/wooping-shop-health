@@ -37,5 +37,5 @@ export function initScanProgress( $el ){
 					}
 				}
 			});
-	}, 500);
+	}, 1000);
 }

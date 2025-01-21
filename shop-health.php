@@ -13,7 +13,6 @@
  * Requires PHP: 7.4
  * Requires Plugins: woocommerce
  * 
- * Woo: wooping-shop-health
  * WC requires at least: 8.6
  * WC tested up to: 9.4
  * 
@@ -30,6 +29,10 @@ define( 'SHOP_HEALTH_VERSION', '1.2.0' );
 define( 'SHOP_HEALTH_DOCUMENTATION_URL', 'https://wooping.io/docs/shop-health/' );
 
 if ( ! file_exists( SHOP_HEALTH_PATH . '/vendor/autoload.php' ) ) {
+	return;
+}
+
+if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	return;
 }
 

@@ -12,7 +12,7 @@ class Options {
 	/**
 	 * The group name under which the options are stored.
 	 */
-	protected string $group_name = 'wooping_shop_health';
+	protected static string $group_name = 'wooping_shop_health';
 
 	/**
 	 * Save the statistics for the dashboard page
@@ -20,7 +20,7 @@ class Options {
 	public function save_statistics(): array {
 
 		$stats = ( new Statistics() )->get();
-		\update_option( 'wooping_shop_health_statistics', $stats );
+		self::set( 'statistics', $stats );
 
 		return $stats;
 	}
@@ -62,13 +62,27 @@ class Options {
 	 * @since 1.2
 	 */
 	public function version_number() {
-		$options = get_option( $this->group_name );
+		$options = \get_option( self::$group_name );
 
 		if( ! isset( $options['version'] ) ) {
 			$options['version'] = SHOP_HEALTH_VERSION;
-			update_option( $this->group_name, $options );
+			\update_option( self::$group_name, $options );
 		}
 
 		return $options['version'];
+	}
+
+	public static function get( $key ) {
+		$options = get_option( self::$group_name );
+
+		return $options[ $key ] ?? false;
+	}
+
+	public static function set( $key, $value ) {
+		$options = get_option( self::$group_name );
+
+		$options[ $key ] = $value;
+
+		return \update_option( self::$group_name, $options );
 	}
 }
