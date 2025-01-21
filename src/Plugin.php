@@ -14,6 +14,8 @@ use Wooping\ShopHealth\Rest\RefreshStats;
 use Wooping\ShopHealth\Rest\ScanProgress;
 use Wooping\ShopHealth\Rest\ScanShop;
 use Wooping\ShopHealth\Rest\UpdateIssueStatus;
+use Wooping\ShopHealth\Updates\Routines;
+use Wooping\ShopHealth\Updates\Updater;
 use Wooping\ShopHealth\WooCommerce\Admin\Products;
 use Wooping\ShopHealth\WooCommerce\Admin\Settings;
 use Wooping\ShopHealth\WooCommerce\Compatibility;
@@ -22,7 +24,6 @@ use Wooping\ShopHealth\WordPress\HandleAdminRequest;
 use Wooping\ShopHealth\WordPress\ManagePluginActions;
 use Wooping\ShopHealth\WordPress\Notices;
 use Wooping\ShopHealth\WordPress\RegisterPages;
-use Wooping\ShopHealth\WordPress\Updates;
 use WP_CLI;
 
 /**
@@ -49,7 +50,7 @@ class Plugin {
 		}
 
 		// Log the activation.
-		( new Updates() )->plugin_activated();
+		( new Updater() )->plugin_activated();
 
 		// Set activated.
 		\add_option( 'shophealth_activated', Carbon::now(), '', false );
@@ -72,13 +73,18 @@ class Plugin {
 		( new Options() )->clean_up();
 
 		// Log the deactivation.
-		( new Updates() )->plugin_deactivated();
+		( new Updater() )->plugin_deactivated();
 	}
 
 	/**
 	 * Call all classes needed for the custom functionality.
 	 */
 	public function init(): void {
+
+		// Check if updates should be run
+		if ( \version_compare( Options::get( 'version' ), \SHOP_HEALTH_VERSION, '<' ) ) {
+			( new Routines() )->run_updates();
+		}
 
 		// General WordPress hooks.
 		( new Assets() )->register_hooks();
@@ -100,9 +106,9 @@ class Plugin {
 		( new Settings() )->register_hooks();
 
 		// ShopHealth hooks.
-		( new Updates() )->register_hooks();
+		( new Updater() )->register_hooks();
 
-		( new Options )->version_number();
+		( new Options() )->version_number();
 
 		// If we're in WP CLI mode, enable commands.
 		if ( \defined( 'WP_CLI' ) && \WP_CLI ) {

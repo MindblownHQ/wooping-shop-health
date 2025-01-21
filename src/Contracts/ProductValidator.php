@@ -3,6 +3,7 @@
 namespace Wooping\ShopHealth\Contracts;
 
 use WC_Product;
+use Wooping\ShopHealth\Models\Database\Options;
 use Wooping\ShopHealth\Models\ScannedObject;
 
 /**
@@ -27,9 +28,8 @@ abstract class ProductValidator extends Validator {
 	 * Does this validator have the requirements to run at all?
 	 */
 	public function can_run(): bool {
-
 		// Check if this validator is on the "mass-ignore" list.
-		$ignored_validators = \get_option( 'wooping_shop_health_ignored_validators', [] );
+		$ignored_validators = Options::get( 'ignored_validators', [] );
 
 		// Don't run it if it is.
 		if ( \in_array( $this->get_validator_short_name(), $ignored_validators, true ) ) {

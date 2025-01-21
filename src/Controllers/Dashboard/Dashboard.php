@@ -6,6 +6,7 @@ use Automattic\WooCommerce\Utilities\OrderUtil;
 use Wooping\ShopHealth\Contracts\Controller;
 use Wooping\ShopHealth\Helpers\Scans;
 use Wooping\ShopHealth\Helpers\ScoreCalculator;
+use Wooping\ShopHealth\Models\Database\Options;
 use Wooping\ShopHealth\Models\Issue;
 
 /**
@@ -72,7 +73,7 @@ class Dashboard extends Controller {
 			'shop_issues'             => $shop_issues,
 			'product_issues'          => $all_product_issues,
 			'pressing_product_issues' => $pressing_product_issues,
-			'stats'                   => \get_option( 'wooping_shop_health_statistics' ),
+			'stats'                   => Options::get( 'statistics' ),
 			'has_hpos'                => $has_hpos,
 			'last_scan'               => $last_scan,
 			'scans_in_progress'       => Scans::get_total_pending_jobs_in_queue(),
