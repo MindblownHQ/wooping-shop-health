@@ -73,7 +73,7 @@ class Dashboard extends Controller {
 			'shop_issues'             => $shop_issues,
 			'product_issues'          => $all_product_issues,
 			'pressing_product_issues' => $pressing_product_issues,
-			'stats'                   => Options::get( 'health_statistics' ),
+			'stats'                   => Options::get( 'statistics' ),
 			'has_hpos'                => $has_hpos,
 			'last_scan'               => $last_scan,
 			'scans_in_progress'       => Scans::get_total_pending_jobs_in_queue(),
