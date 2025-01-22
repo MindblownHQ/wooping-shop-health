@@ -29,10 +29,13 @@ abstract class ProductValidator extends Validator {
 	 */
 	public function can_run(): bool {
 		// Check if this validator is on the "mass-ignore" list.
-		$ignored_validators = Options::get( 'ignored_validators', [] );
-
+		$ignored_validators = Options::get( 'ignored_validators' );
+		
 		// Don't run it if it is.
-		if ( \in_array( $this->get_validator_short_name(), $ignored_validators, true ) ) {
+		if ( 
+			\is_array( $ignored_validators ) && 
+			\in_array( $this->get_validator_short_name(), $ignored_validators, true ) 
+		) {
 			return false;
 		}
 
