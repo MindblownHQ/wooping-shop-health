@@ -15,7 +15,7 @@ abstract class Schema {
 	protected function get_table_name(): string {
 		global $wpdb;
 
-		return $wpdb->base_prefix . $this->table_name;
+		return $wpdb->prefix . $this->table_name;
 	}
 
 	/**
