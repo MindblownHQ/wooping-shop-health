@@ -106,7 +106,7 @@ use Wooping\ShopHealth\Models\ScannedObject;
 			<?php if( !empty( $products ) && $max_pages > 1 ):?>
 			<nav class="wsh-pagination">
 				<?php
-				$baseurl = \woop_get_route( 'product_issues' );
+				$baseurl = \conductor_get_route_url( 'product_issues' );
 				for ( $i = 1; $i <= $max_pages; $i++ ) {
 
 					if ( $i == $current_page ) {

@@ -34,6 +34,15 @@ if ( ! file_exists( SHOP_HEALTH_PATH . '/vendor/autoload.php' ) ) {
 
 require SHOP_HEALTH_PATH . '/vendor/autoload.php';
 
+// Init conductor and register our plugin
+conductor()->plugins()->register( 'shop-health', [
+	'file' 		=> SHOP_HEALTH_FILE,
+	'path'		=> SHOP_HEALTH_PATH,
+	'version' 	=> SHOP_HEALTH_VERSION,
+]);
+
+
+
 // Upon activation check if the data model is in order.
 register_activation_hook( SHOP_HEALTH_FILE, function() {
 	( new Plugin() )->install();

@@ -6,7 +6,7 @@
             <?php woop_template('components.setting-tabs'); ?>
             <section class="wsh-tabs-pane">
                 <section class="wsh-tabs-pane__content">
-                    <form class="panel" action="<?php echo woop_get_route('save_settings'); ?>" method="POST">
+                    <form class="panel" action="<?php echo conductor_get_route_url('shop_health_save_settings'); ?>" method="POST">
                         <?php echo woop_nonce_field('save_settings'); ?>
                         <section class="panel--header with-controls">
                             <h2><?php esc_html_e('Ignored issues', 'wooping-shop-health'); ?></h2>

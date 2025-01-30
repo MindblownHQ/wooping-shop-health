@@ -2,7 +2,7 @@
 
 namespace Wooping\ShopHealth\WooCommerce\Admin;
 
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 use Wooping\ShopHealth\Controllers\Cron;
 
 /**

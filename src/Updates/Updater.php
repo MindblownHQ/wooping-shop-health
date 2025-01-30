@@ -3,7 +3,7 @@
 namespace Wooping\ShopHealth\Updates;
 
 use Throwable;
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 use WP_Upgrader;
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 

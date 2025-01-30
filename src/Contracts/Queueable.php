@@ -2,7 +2,7 @@
 
 namespace Wooping\ShopHealth\Contracts;
 
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 
 /**
  * Class Queueable

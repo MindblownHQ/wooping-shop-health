@@ -1,6 +1,6 @@
 <?php
 
-namespace Wooping\ShopHealth\Controllers\Dashboard;
+namespace Wooping\ShopHealth\Controllers;
 
 use Automattic\WooCommerce\Utilities\OrderUtil;
 use Wooping\ShopHealth\Contracts\Controller;
@@ -8,6 +8,7 @@ use Wooping\ShopHealth\Helpers\Scans;
 use Wooping\ShopHealth\Helpers\ScoreCalculator;
 use Wooping\ShopHealth\Models\Database\Options;
 use Wooping\ShopHealth\Models\Issue;
+use Wooping\ShopHealth\Models\ScannedObject;
 
 /**
  * Class DashboardController
@@ -25,7 +26,7 @@ class Dashboard extends Controller {
 	 *
 	 * @return void
 	 */
-	public function display(): void {
+	public function index(): void {
 
 		$score_calculator = new ScoreCalculator();
 		$settings         = $score_calculator->settings();
@@ -81,5 +82,53 @@ class Dashboard extends Controller {
 
 		// render the view.
 		\woop_view( 'dashboard-page', $data )->render();
+	}
+
+
+
+	/**
+	 * Display the product issues view
+	 */
+	public function products(): void {
+
+		// set per page and current page variables.
+		$per_page     = 40;
+		$current_page = 1;
+		// phpcs:disable
+		if ( isset( $_GET['current_page'] ) && \is_numeric( $_GET['current_page'] ) ) {
+			$current_page = \absint( $_GET['current_page'] );
+		}
+		// phpcs:enable
+
+		// calculate pagination offset.
+		$offset    = ( ( $current_page - 1 ) * $per_page );
+		$total     = ScannedObject::where( 'object_type', 'product' )->where( 'score', '<', 100 )->count();
+		$max_pages = \ceil( $total / $per_page );
+
+		$products = ScannedObject::where( 'object_type', 'product' )
+				->whereHas( 'relevant_issues' )
+				->with( [ 'relevant_issues' ] )
+				->offset( $offset )
+				->limit( $per_page )
+				->get();
+
+		\woop_view( 'product-issues', \compact( 'products', 'max_pages', 'current_page' ) )->render();
+	}
+
+
+	/**
+	 * Display the shop issues.
+	 *
+	 * @return void
+	 */
+	public function shop(): void {
+
+		$objects = ScannedObject::where( 'object_type', '!=', 'product' )
+				->whereHas( 'relevant_issues' )
+				->with([ 'relevant_issues' ])
+				->get();
+				
+
+		\woop_view( 'general-issues', \compact( 'objects' ) )->render();
 	}
 }

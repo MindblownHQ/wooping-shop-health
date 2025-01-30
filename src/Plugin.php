@@ -20,10 +20,9 @@ use Wooping\ShopHealth\WooCommerce\Admin\Products;
 use Wooping\ShopHealth\WooCommerce\Admin\Settings;
 use Wooping\ShopHealth\WooCommerce\Compatibility;
 use Wooping\ShopHealth\WordPress\Assets;
-use Wooping\ShopHealth\WordPress\HandleAdminRequest;
+use Wooping\ShopHealth\WordPress\Routes;
 use Wooping\ShopHealth\WordPress\ManagePluginActions;
 use Wooping\ShopHealth\WordPress\Notices;
-use Wooping\ShopHealth\WordPress\RegisterPages;
 use WP_CLI;
 
 /**
@@ -88,11 +87,10 @@ class Plugin {
 
 		// General WordPress hooks.
 		( new Assets() )->register_hooks();
-		( new RegisterPages() )->register_hooks();
 		( new ManagePluginActions() )->register_hooks();
 		( new Notices() )->register_hooks();
-		( new HandleAdminRequest() )->register_hooks();
 		( new Queue() )->register_hooks();
+		( new Routes() )->register_hooks();
 
 		// Rest Endpoints.
 		( new UpdateIssueStatus() )->register_hooks();

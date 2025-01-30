@@ -5,12 +5,12 @@
 
 use Wooping\ShopHealth\Views\View;
 
-if ( ! function_exists( 'woop_get_route' ) ) {
+if ( ! function_exists( 'conductor_get_route' ) ) {
 
 	/**
 	 * Get a route and construct a url from it.
 	 */
-	function woop_get_route( string $route_name ): string {
+	function conductor_get_route( string $route_name ): string {
 
 		// get all admin routes.
 		$admin_routes = wooping_get_routes();

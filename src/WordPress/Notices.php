@@ -3,21 +3,20 @@
 namespace Wooping\ShopHealth\WordPress;
 
 use WC_Admin_Notices;
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
-use Wooping\ShopHealth\Contracts\Router;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 
 /**
  * Class Notices
  *
  * Adds Woocommerce Admin Notices to routes
  */
-class Notices extends Router implements Hookable {
+class Notices implements Hookable {
 
 	/**
 	 * Registers the hooks
 	 */
 	public function register_hooks(): void {
-		\add_action( 'admin_init', [ $this, 'add_notices' ] );
+		//\add_action( 'admin_init', [ $this, 'add_notices' ] );
 	}
 
 	/**

@@ -126,7 +126,7 @@ $current_user = wp_get_current_user();
 							)->render();
 							?>
 							<a class="wsh-analytics__link has-icon"
-							   href="<?php echo woop_get_route( 'shop_issues' ); ?>">
+							   href="<?php echo conductor_get_route_url( 'shop_issues' ); ?>">
 								<span><?php esc_html_e( 'See all shop issues', 'wooping-shop-health' ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none"
 									 viewBox="0 0 24 24"
@@ -151,7 +151,7 @@ $current_user = wp_get_current_user();
 							)->render();
 							?>
 							<a class="wsh-analytics__link has-icon"
-							   href="<?php echo woop_get_route( 'product_issues' ); ?>">
+							   href="<?php echo conductor_get_route_url( 'product_issues' ); ?>">
 								<span><?php esc_html_e( 'See all product issues', 'wooping-shop-health' ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none"
 									 viewBox="0 0 24 24"
@@ -178,7 +178,7 @@ $current_user = wp_get_current_user();
 								} ?>
 							</ul>
 							<a class="link has-icon"
-							   href="<?php echo \woop_get_route( 'product_issues' ); ?>">
+							   href="<?php echo \conductor_get_route_url( 'product_issues' ); ?>">
 								<span><?php \esc_html_e( 'See all product issues', 'wooping-shop-health' ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none"
 									 viewBox="0 0 24 24"
@@ -197,7 +197,7 @@ $current_user = wp_get_current_user();
 										</li>
 									<?php } ?>
 								</ul>
-								<a class="link has-icon" href="<?php echo \woop_get_route( 'shop_issues' ); ?>">
+								<a class="link has-icon" href="<?php echo \conductor_get_route_url( 'shop_issues' ); ?>">
 									<span><?php \esc_html_e( 'See all shop issues', 'wooping-shop-health' ); ?></span>
 									<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none"
 										 viewBox="0 0 24 24"
