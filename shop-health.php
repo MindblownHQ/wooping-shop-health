@@ -22,7 +22,10 @@
  */
 
 use Wooping\ShopHealth\Plugin;
+use Wooping\ShopHealth\Updates\Installer;
+use Wooping\ShopHealth\Updates\Uninstaller;
 
+define( 'SHOP_HEALTH_SLUG', 'wooping-shop-health' );
 define( 'SHOP_HEALTH_FILE', __FILE__ );
 define( 'SHOP_HEALTH_PATH', dirname( SHOP_HEALTH_FILE ) );
 define( 'SHOP_HEALTH_VERSION', '1.3.0' );
@@ -35,23 +38,13 @@ if ( ! file_exists( SHOP_HEALTH_PATH . '/vendor/autoload.php' ) ) {
 require SHOP_HEALTH_PATH . '/vendor/autoload.php';
 
 // Init conductor and register our plugin
-conductor()->plugins()->register( 'shop-health', [
-	'file' 		=> SHOP_HEALTH_FILE,
-	'path'		=> SHOP_HEALTH_PATH,
-	'version' 	=> SHOP_HEALTH_VERSION,
+conductor()->plugins()->register( SHOP_HEALTH_SLUG, [
+	'file' 				=> SHOP_HEALTH_FILE,
+	'path'				=> SHOP_HEALTH_PATH,
+	'version' 			=> SHOP_HEALTH_VERSION,
+	'on_activate'		=> new Installer(),
+	'on_deactivate'		=> new Uninstaller(),
 ]);
-
-
-
-// Upon activation check if the data model is in order.
-register_activation_hook( SHOP_HEALTH_FILE, function() {
-	( new Plugin() )->install();
-} );
-
-// Upon deactivation, uninstall the plugin
-register_deactivation_hook( SHOP_HEALTH_FILE, function() {
-	( new Plugin() )->uninstall();
-} );
 
 /**
  * Bootstrap the plugin.
