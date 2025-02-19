@@ -39,9 +39,6 @@
 
         <!-- Else on a new line? Come on.. no! -->
         <exclude name="Universal.ControlStructures.IfElseDeclaration.NoNewLine" />
-
-        <!-- We're using slashes instead of underscores for hook naming -->
-        <exclude name="Yoast.NamingConventions.ValidHookName.UseUnderscores"/>
     </rule>
 
     <rule ref="Yoast.NamingConventions.ObjectNameDepth">
