@@ -59,24 +59,6 @@ class Issue extends Model {
 	}
 
 	/**
-	 * Calculate scores on creation and update
-	 */
-	public static function boot(): void {
-		parent::boot();
-		static::created(
-			static function ( $model ) {
-				// @todo add $model->scanned_object->calulcate_score();
-			}
-		);
-
-		static::updated(
-			static function ( $model ) {
-				// @todo add $model->scanned_object->calulcate_score();
-			}
-		);
-	}
-
-	/**
 	 * Return a link to the documentation of this issue
 	 *
 	 * This function is directly accessible using $issue->docs_link (Laravel Accessors)
@@ -93,7 +75,7 @@ class Issue extends Model {
 	public function getDocsDescriptionAttribute(): ?string {
 		$validator = $this->validator_class;
 
-		if( class_exists( $validator ) ){
+		if ( \class_exists( $validator ) ) {
 			return $validator::documentation();
 		}
 

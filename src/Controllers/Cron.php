@@ -19,7 +19,7 @@ use WP_REST_Response;
 class Cron extends Controller {
 
 	/**
-	 * Schedule absolutely every scan we have
+	 * Schedule absolutely every scan we have.
 	 */
 	public function schedule_every_scan(): void {
 		$this->schedule_all_product_scans();
@@ -33,14 +33,14 @@ class Cron extends Controller {
 	}
 
 	/**
-	 * Schedule a scan for all available products
+	 * Schedule a scan for all available products.
 	 */
 	public function schedule_all_product_scans(): void {
 
 		// add timestamp here, so our progress bar can query on a certain timestamp.
 		( new Options() )->set_queue_timestamp();
 
-		// Remove any of the old product scans in the old queue
+		// Remove any of the old product scans in the old queue.
 		\as_unschedule_all_actions( 'wooping/shop-health/product/batch_scan' );
 		\as_unschedule_all_actions( 'wooping/shop-health/product/scan' );
 
@@ -67,7 +67,7 @@ class Cron extends Controller {
 	}
 
 	/**
-	 * Schedule a full settings-scan
+	 * Schedule a full settings-scan.
 	 */
 	public function schedule_all_setting_scans(): void {
 

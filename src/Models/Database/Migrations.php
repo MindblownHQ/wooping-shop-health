@@ -19,12 +19,12 @@ class Migrations {
 
 		// Get the migrations and loop through them.
 		$migrations = $this->get_migrations();
-		$sites = $this->get_sites();
+		$sites      = $this->get_sites();
 
-		foreach( $sites as $site ){
+		foreach ( $sites as $site ) {
 
 			// Switch to another site to run these migrations.
-			if( !is_null( $site ) ){
+			if ( ! \is_null( $site ) ) {
 				\switch_to_blog( \absint( $site ) );
 			}
 
@@ -45,12 +45,12 @@ class Migrations {
 
 		// Get the migrations and loop through them.
 		$migrations = $this->get_migrations();
-		$sites = $this->get_sites();
-		
-		foreach( $sites as $site ){
+		$sites      = $this->get_sites();
+
+		foreach ( $sites as $site ) {
 
 			// Switch to another site to run these migrations.
-			if( !is_null( $site ) ){
+			if ( ! \is_null( $site ) ) {
 				\switch_to_blog( \absint( $site ) );
 			}
 
@@ -78,17 +78,16 @@ class Migrations {
 		];
 	}
 
-
 	/**
 	 * If we're dealing with a multisite, this function provides an array of blog_ids to run this migration for.,
 	 */
 	public function get_sites(): array {
-		
+
 		// Only respond with an array of site ids if we're in the network admin.
-		if( \is_multisite() && \is_network_admin() ){
+		if ( \is_multisite() && \is_network_admin() ) {
 
 			$response = [];
-			foreach( \get_sites() as $site ){
+			foreach ( \get_sites() as $site ) {
 				$response[] = $site->blog_id;
 			}
 
@@ -97,6 +96,5 @@ class Migrations {
 
 		// Default to an array with null, so we can still loop through it.
 		return [ null ];
-		
 	}
 }

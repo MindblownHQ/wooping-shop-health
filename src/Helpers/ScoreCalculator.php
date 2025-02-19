@@ -15,11 +15,11 @@ class ScoreCalculator {
 	 */
 	public function settings(): int {
 		// Return the average score.
-		$settingScore = ScannedObject::setting()->avg( 'score' );
-		if ( ! $settingScore ) {
-			$settingScore = 100;
+		$setting_score = ScannedObject::setting()->avg( 'score' );
+		if ( ! $setting_score ) {
+			$setting_score = 100;
 		}
-		return (int) $settingScore;
+		return (int) $setting_score;
 	}
 
 	/**
@@ -29,11 +29,11 @@ class ScoreCalculator {
 	 */
 	public function global_product(): int {
 		// Return the average score.
-		$productScore = ScannedObject::product()->avg( 'score' );
-		if ( ! $productScore ) {
-			$productScore = 100;
+		$product_score = ScannedObject::product()->avg( 'score' );
+		if ( ! $product_score ) {
+			$product_score = 100;
 		}
-		return (int) $productScore;
+		return (int) $product_score;
 	}
 
 	/**

@@ -20,16 +20,16 @@ class CheckBulkIgnoredValidators extends Queueable {
 	/**
 	 * This job updates issues and makes them more important as they grow older
 	 *
-	 * @param array<string> $old An array of previous ignored validators.
-	 * @param array<string> $new An fresh array of ignored validators.
+	 * @param array<string> $old_array An array of previous ignored validators.
+	 * @param array<string> $new_array An fresh array of ignored validators.
 	 *
 	 * @return void
 	 */
-	public function run( array $old, array $new ): void {
+	public function run( array $old_array, array $new_array ): void {
 
 		// get the validators to un-ignore and to (re)-ignore.
-		$unignore = \collect( $old )->diff( $new );
-		$ignore   = \collect( $new );
+		$unignore = \collect( $old_array )->diff( $new_array );
+		$ignore   = \collect( $new_array );
 
 		// unignored validators we need to update to resolved, so they'll automatically
 		// re-appear after saving a product.

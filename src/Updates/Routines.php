@@ -1,21 +1,20 @@
 <?php
-/**
- * Handle update routines for the plugin.
- */
-
 namespace Wooping\ShopHealth\Updates;
 
 use Wooping\ShopHealth\Models\Database\Options;
 
+/**
+ * Handle update routines for the plugin.
+ */
 class Routines {
 
 	/**
 	 * An array of version numbers with their corresponding update routines.
 	 * Each routine represents a method.
 	 */
-	protected array $update_routines = [
+	protected array $update_routines = array(
 		'1.3.0' => '130',
-	];
+	);
 
 	/**
 	 * Run defined update routines.
@@ -25,13 +24,13 @@ class Routines {
 			// Check if a update routine has a higher version number than the one currently stored in the database.
 			// If so: we need to run this routine.
 			if ( \version_compare( Options::get( 'version' ), $version, '<' ) ) {
-				\call_user_func( [ $this, 'update_' . $callback ] );
+				\call_user_func( array( $this, 'update_' . $callback ) );
 			}
 		}
 
 		$old_version = Options::get( 'version' );
 
-		// After all update routines are done, update the version in the database
+		// After all update routines are done, update the version in the database.
 		Options::set( 'version', \SHOP_HEALTH_VERSION );
 
 		$new_version = Options::get( 'version' );
@@ -51,12 +50,12 @@ class Routines {
 	 * Handles updating of prefixed options to a single option in the WordPress option table.
 	 */
 	protected function update_130(): void {
-		$old_options = [
+		$old_options = array(
 			'wooping_shop_health_ignored_validators',
 			'wooping_shop_health_scan_last_triggered',
 			'wooping_shop_health_statistics',
 			'wooping_shop_health_max_scores',
-		];
+		);
 
 		foreach ( $old_options as $old_option ) {
 			$new_option_name = \str_replace( 'wooping_shop_health_', '', $old_option );

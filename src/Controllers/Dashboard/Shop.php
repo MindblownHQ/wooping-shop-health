@@ -21,9 +21,8 @@ class Shop extends Controller {
 
 		$objects = ScannedObject::where( 'object_type', '!=', 'product' )
 				->whereHas( 'relevant_issues' )
-				->with([ 'relevant_issues' ])
+				->with( [ 'relevant_issues' ] )
 				->get();
-				
 
 		\woop_view( 'general-issues', \compact( 'objects' ) )->render();
 	}

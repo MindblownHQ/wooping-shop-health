@@ -54,11 +54,11 @@ if ( ! function_exists( 'woop_current_route' ) ) {
 	 */
 	function woop_current_route(): string {
 		if ( isset( $_SERVER['REQUEST_METHOD'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-			// Sniff ignore: we don't need to check for a nonce here.
+			// phpcs:ignore -- we don't need to check for a nonce here.
 			return ( wp_unslash( $_GET['woop_request'] ) ?? '' ); // phpcs:ignore 
-		
-		}else if( isset( $_GET['page'] ) ){
-			// Sniff ignore: we don't need to check for a nonce here.
+
+		// phpcs:ignore -- we don't need to check for a nonce here.
+		}elseif ( isset( $_GET['page'] ) ) {
 			return str_replace( 'woop_', '', ( wp_unslash( $_GET['page'] ) ?? '' ) ); // phpcs:ignore 
 		}
 
