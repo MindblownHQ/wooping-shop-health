@@ -35,13 +35,7 @@ use Wooping\ShopHealth\Models\ScannedObject;
 					foreach ( $products as $product ) { ?>
 						<div class="wsh-issues-table__product">
 							<figure class="wsh-issues-table__product-image">
-								<?php
-								$thumbnail = get_the_post_thumbnail( $product->object_id, 'thumbnail' );
-								if ( empty( $thumbnail ) ) {
-									$thumbnail = wc_placeholder_img( 'thumbnail' );
-								}
-								echo $thumbnail;
-								?>
+								<?php echo $product->thumbnail();?>
 							</figure>
 							<div class="wsh-issues-table__product-title">
 								<?php echo sprintf( '<span>%s</span>', get_the_title( $product->object_id ) ); ?>
