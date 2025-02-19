@@ -44,6 +44,13 @@
   "scripts": {
     "analyse": "vendor/bin/phpstan analyse src --memory-limit 1G",
     "check-cs": "vendor/bin/phpcs --config-set php_version 7040 && ./vendor/bin/phpcs src/",
-    "fix-cs": "vendor/bin/phpcbf --config-set php_version 7040 && ./vendor/bin/phpcbf src/"
+    "fix-cs": "vendor/bin/phpcbf --config-set php_version 7040 && ./vendor/bin/phpcbf src/",
+    "prefix-dependencies": "./vendor/humbug/php-scoper/bin/php-scoper add-prefix --prefix=Shop_Maestro_Vendor --output-dir=vendor_prefixed/ --config=vendor/shop-maestro/conductor/config/php-scoper/dependency-injection.inc.php --force --quiet",
+    "post-install-cmd": [
+      "@prefix-dependencies"
+    ],
+    "post-autoload-dump": [
+      "@prefix-dependencies"
+    ]
   }
 }
