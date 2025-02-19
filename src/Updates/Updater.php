@@ -54,7 +54,7 @@ class Updater implements Hookable {
 	 */
 	public function plugin_activated(): void {
 
-		$url      = self::FEEDBACK_URL . 'plugin/activated';
+		$url = self::FEEDBACK_URL . 'plugin/activated';
 		\wp_remote_post( $url, $this->get_plugin_info() );
 	}
 
@@ -63,7 +63,7 @@ class Updater implements Hookable {
 	 */
 	public function plugin_deactivated(): void {
 
-		$url      = self::FEEDBACK_URL . 'plugin/deactivated';
+		$url = self::FEEDBACK_URL . 'plugin/deactivated';
 		\wp_remote_post( $url, $this->get_plugin_info() );
 	}
 

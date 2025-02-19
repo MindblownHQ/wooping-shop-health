@@ -19,7 +19,7 @@ abstract class Validator {
 	/**
 	 * The requirements of this validator.
 	 */
-	public const REQUIREMENTS = array();
+	public const REQUIREMENTS = [];
 
 	/**
 	 * Holds the object id. Can be a page or product id, setting slug, product archive slug or category slug.
@@ -166,11 +166,11 @@ abstract class Validator {
 	protected function save_issue(): void {
 		$issue = $this->object->issues()->create();
 		$issue->fill(
-			array(
+			[
 				'message'   => $this->message(),
 				'severity'  => $this->severity(),
 				'validator' => $this->get_validator_short_name(),
-			)
+			]
 		)->save();
 	}
 }
