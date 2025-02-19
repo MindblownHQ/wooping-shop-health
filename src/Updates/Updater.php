@@ -2,25 +2,18 @@
 
 namespace Wooping\ShopHealth\Updates;
 
-use Throwable;
-use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 use WP_Upgrader;
-use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 
 /**
  * Class Updates
  *
- * This class handles updates for this plugin.
+ * This class handles what to do after a plugin update.
  */
 class Updater implements Hookable {
 
 	/**
-	 * The url constants with which we communicate to the world outside.
-	 */
-	protected const UPDATE_URL   = 'https://updates.wooping.io/wooping-shop-health';
-
-	/**
-	 * Register hooks for enqueueing scripts and styles
+	 * Register hooks to run after a plugin update
 	 *
 	 * @return void
 	 */
@@ -47,6 +40,6 @@ class Updater implements Hookable {
 
 		// Run general migration scrips 
 		\as_enqueue_async_action( 'woop_after_update', $options, '', true );
-		
+
 	}
 }

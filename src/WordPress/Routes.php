@@ -25,13 +25,6 @@ class Routes implements Hookable{
 			'menu_label' => __( 'Shop Health', 'wooping-shop-health' ),
 		]);
 
-		// Settings
-		\register_conductor_route( 'shop_health_settings', [
-			'method' => WP_Rest_Server::READABLE,
-			'callback' => [ Settings::class, 'display' ],
-			'menu_label' => __( 'Shop Health Settings', 'wooping-shop-health' ),
-		]);
-
 		// Shop Issues
 		\register_conductor_route( 'shop_issues', [
 			'method' => WP_Rest_Server::READABLE,
@@ -44,12 +37,16 @@ class Routes implements Hookable{
 			'callback' => [ Dashboard::class, 'products' ],
 		]);
 
-		// Save Settings:
-		\register_conductor_route( 'shop_health_save_settings', [
-			'method' => WP_Rest_Server::EDITABLE,
-			'callback' => [ Settings::class, 'update' ],
-			'middleware' => [ IsAllowed::class, ValidNonce::class ]
+		// Register settings page
+		conductor()->settings()->register_page( 'shop_health', [
+			'label' 			=> __( 'Shop Health', 'wooping-shop-health' ),
+			'key'				=> 'shop_maestro_health',
+			'callback'		 	=> [ Settings::class, 'display' ],
+			'middleware' 		=> [ IsAllowed::class, ValidNonce::class ]  
 		]);
-	
+
+		//conductor()->settings()->get( 'shop_health', 'ignored_validators' );
+		//get_option( 'shop_maestro_health_ignored_validators' );
+
 	}
 }

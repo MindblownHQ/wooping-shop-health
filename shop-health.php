@@ -43,7 +43,7 @@ conductor()->plugins()->register( SHOP_HEALTH_SLUG, [
 	'path'				=> SHOP_HEALTH_PATH,
 	'version' 			=> SHOP_HEALTH_VERSION,
 	'on_activate'		=> new Installer(),
-	'on_deactivate'		=> new Uninstaller(),
+	'on_deactivate'		=> new Uninstaller()
 ]);
 
 /**
