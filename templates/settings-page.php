@@ -3,7 +3,8 @@
 	<h2><?php esc_html_e('Ignored issues', 'wooping-shop-health'); ?></h2>
 	<p><?php esc_html_e('Which of these issues would you like to ignore throughout the site?', 'wooping-shop-health'); ?></p>
 </section>
-<?php $ignored = conductor()->settings()->get('shop_health', 'ignored_validators');?>
+<?php 
+$ignored = conductor()->settings()->get('shop_health', 'ignored_validators', []);?>
 <ul class="mass-ignore-issues">
 	<li class="row">
 		<label class="issue-description" for="ignoreHasDimensions"
