@@ -80,6 +80,8 @@ class Migrations {
 
 	/**
 	 * If we're dealing with a multisite, this function provides an array of blog_ids to run this migration for.,
+	 *
+	 * @return array<int>
 	 */
 	public function get_sites(): array {
 
