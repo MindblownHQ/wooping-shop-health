@@ -3,7 +3,7 @@
 namespace Wooping\ShopHealth\WooCommerce\Admin;
 
 use WC_Product;
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 use Wooping\ShopHealth\Models\Database\Options;
 use Wooping\ShopHealth\Models\ScannedObject;
 use Wooping\ShopHealth\Models\Schema\AddScannedObjectsTable;

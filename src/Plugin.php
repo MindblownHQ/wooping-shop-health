@@ -7,7 +7,6 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Wooping\ShopHealth\Cli\Clean as CleanCommands;
 use Wooping\ShopHealth\Cli\Run as RunCommands;
 use Wooping\ShopHealth\Cli\Schedule as ScheduleCommands;
-use Wooping\ShopHealth\Models\Database\Migrations;
 use Wooping\ShopHealth\Models\Database\Options;
 use Wooping\ShopHealth\Queue\Register as Queue;
 use Wooping\ShopHealth\Rest\RefreshStats;
@@ -20,61 +19,15 @@ use Wooping\ShopHealth\WooCommerce\Admin\Products;
 use Wooping\ShopHealth\WooCommerce\Admin\Settings;
 use Wooping\ShopHealth\WooCommerce\Compatibility;
 use Wooping\ShopHealth\WordPress\Assets;
-use Wooping\ShopHealth\WordPress\HandleAdminRequest;
+use Wooping\ShopHealth\WordPress\Routes;
 use Wooping\ShopHealth\WordPress\ManagePluginActions;
 use Wooping\ShopHealth\WordPress\Notices;
-use Wooping\ShopHealth\WordPress\RegisterPages;
 use WP_CLI;
 
 /**
  * Plugin God class.
  */
 class Plugin {
-
-	/**
-	 * Runs when the plugin is first activated.
-	 *
-	 * @return void
-	 */
-	public function install(): void {
-
-		// Run migrations.
-		( new Migrations() )->run();
-
-		// Save a copy of the stats.
-		( new Options() )->save_statistics();
-
-		// Schedule a max_scores calculation.
-		if ( \function_exists( 'as_enqueue_async_action' ) ) {
-			\as_enqueue_async_action( 'wooping/shop-health/calculate_max_scores', [], '', true );
-		}
-
-		// Log the activation.
-		( new Updater() )->plugin_activated();
-
-		// Set activated.
-		\add_option( 'shophealth_activated', Carbon::now(), '', false );
-	}
-
-	/**
-	 * Runs when the plugin gets deactivated.
-	 *
-	 * @return void
-	 */
-	public function uninstall(): void {
-
-		// Remove all scheduled tasks.
-		( new Queue() )->clean();
-
-		// Roll back our migrations.
-		( new Migrations() )->roll_back();
-
-		// Clean up the Wooping options.
-		( new Options() )->clean_up();
-
-		// Log the deactivation.
-		( new Updater() )->plugin_deactivated();
-	}
 
 	/**
 	 * Call all classes needed for the custom functionality.
@@ -87,11 +40,10 @@ class Plugin {
 		}
 
 		// General WordPress hooks.
+		( new Routes() )->register_hooks();
 		( new Assets() )->register_hooks();
-		( new RegisterPages() )->register_hooks();
 		( new ManagePluginActions() )->register_hooks();
 		( new Notices() )->register_hooks();
-		( new HandleAdminRequest() )->register_hooks();
 		( new Queue() )->register_hooks();
 
 		// Rest Endpoints.
@@ -107,7 +59,6 @@ class Plugin {
 
 		// ShopHealth hooks.
 		( new Updater() )->register_hooks();
-
 		( new Options() )->version_number();
 
 		// If we're in WP CLI mode, enable commands.

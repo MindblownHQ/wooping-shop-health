@@ -16,15 +16,12 @@
       "Wooping\\ShopHealth\\": "src/"
     },
     "files": [
-      "src/functions.php",
-      "src/routes.php"
+      "src/functions.php"
     ]
   },
   "require": {
     "php": ">=7.4",
-    "illuminate/collections": "^8.83",
-    "illuminate/database": "^8.83",
-    "yahnis-elsts/plugin-update-checker": "^5.5"
+    "shop-maestro/conductor": "dev-main"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.10",
@@ -32,6 +29,12 @@
     "phpstan/extension-installer": "^1.3",
     "yoast/yoastcs": "^3.0"
   },
+  "repositories": [
+	{
+		"type": "vcs",
+		"url": "git@github.com:MindblownHQ/conductor.git"
+	}
+  ],
   "config": {
     "allow-plugins": {
       "phpstan/extension-installer": true,

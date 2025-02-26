@@ -69,7 +69,7 @@ class Settings extends Controller {
 		}
 
 		// return back to the settings page.
-		\wp_safe_redirect( \woop_get_route( 'settings' ) );
+		\wp_safe_redirect( \conductor_get_route_url( 'shop_health_settings' ) );
 		exit();
 	}
 

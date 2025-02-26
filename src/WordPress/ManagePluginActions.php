@@ -2,7 +2,7 @@
 
 namespace Wooping\ShopHealth\WordPress;
 
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 
 /**
  * Class Admin
@@ -31,7 +31,7 @@ class ManagePluginActions implements Hookable {
 	 * @return array<string> $links An updated array of links.
 	 */
 	public function add_settings_link( $links ) {
-		$settings_link = \sprintf( '<a href="%1$s">%2$s</a>', \woop_get_route( 'dashboard' ), \__( 'Dashboard', 'wooping-shop-health' ) );
+		$settings_link = \sprintf( '<a href="%1$s">%2$s</a>', \conductor_get_route_url( 'shop_health' ), \__( 'Dashboard', 'wooping-shop-health' ) );
 		\array_unshift( $links, $settings_link );
 
 		return $links;

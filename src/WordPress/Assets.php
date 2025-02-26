@@ -2,7 +2,7 @@
 
 namespace Wooping\ShopHealth\WordPress;
 
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 
 /**
  * Class Assets
@@ -24,10 +24,10 @@ class Assets implements Hookable {
 	 * Add our custom css and js
 	 */
 	public function enqueue( string $hook ): void {
-		$custom_hook    = \strstr( $hook, 'woop_' );
 		$current_screen = \get_current_screen();
 
-		if ( ! \in_array( $custom_hook, apply_filters( 'wooping/assets/pages', array( 'woop_dashboard', 'woop_shop_issues', 'woop_product_issues', 'woop_settings' ) ), true )
+		if ( 
+			!is_conductor_route( ( $_GET['page'] ?? '' ) )
 			&& $hook !== 'post.php'
 			&& $hook !== 'plugins.php'
 			&& $current_screen->id !== 'edit-product'

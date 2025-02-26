@@ -3,7 +3,7 @@
 namespace Wooping\ShopHealth\WooCommerce;
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
-use Wooping\ShopHealth\Contracts\Interfaces\Hookable;
+use ShopMaestro\Conductor\Contracts\Interfaces\Hookable;
 
 /**
  * Class Compatibility

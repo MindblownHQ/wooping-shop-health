@@ -27,7 +27,7 @@ class Cron extends Controller {
 
 		// if this request came from admin, redirect back to the dashboard.
 		if ( \is_admin() ) {
-			\wp_safe_redirect( \woop_get_route( 'dashboard' ) );
+			\wp_safe_redirect( \conductor_get_route_url( 'shop_health' ) );
 			exit();
 		}
 	}
