@@ -84,7 +84,7 @@ if ( ! function_exists( 'woop_template' ) ) {
 	 *
  	 * @phpcs:disable SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification
 	 */
-	function woop_template( string $template_name, array $attributes = [], $base_dir = SHOP_HEALTH_PATH ): void {
+	function woop_template( string $template_name, array $attributes = [], string $base_dir = SHOP_HEALTH_PATH ): void {
 
 		$template = str_replace( '.', '/', $template_name );
 		$file     = $base_dir . '/templates/' . $template . '.php';
