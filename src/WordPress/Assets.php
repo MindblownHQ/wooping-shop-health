@@ -27,7 +27,7 @@ class Assets implements Hookable {
 		$custom_hook    = \strstr( $hook, 'woop_' );
 		$current_screen = \get_current_screen();
 
-		if ( ! \in_array( $custom_hook, apply_filters( 'wooping/assets/pages', array( 'woop_dashboard', 'woop_shop_issues', 'woop_product_issues', 'woop_settings' ) ), true )
+		if ( ! \in_array( $custom_hook, \apply_filters( 'wooping/assets/pages', [ 'woop_dashboard', 'woop_shop_issues', 'woop_product_issues', 'woop_settings' ] ), true )
 			&& $hook !== 'post.php'
 			&& $hook !== 'plugins.php'
 			&& $current_screen->id !== 'edit-product'

@@ -1,12 +1,11 @@
 <?php
-/**
- * Handle update routines for the plugin.
- */
-
 namespace Wooping\ShopHealth\Updates;
 
 use Wooping\ShopHealth\Models\Database\Options;
 
+/**
+ * Handle update routines for the plugin.
+ */
 class Routines {
 
 	/**
@@ -31,7 +30,7 @@ class Routines {
 
 		$old_version = Options::get( 'version' );
 
-		// After all update routines are done, update the version in the database
+		// After all update routines are done, update the version in the database.
 		Options::set( 'version', \SHOP_HEALTH_VERSION );
 
 		$new_version = Options::get( 'version' );

@@ -153,10 +153,11 @@ class RegisterPages extends Router implements Hookable {
 	/**
 	 * Set the current menu item when viewing a Shop Health Tab
 	 *
-	 * @param ?string $file The menu item slug.
-	 * @return ?string The menu item slug.
+	 * @param string $file The menu item slug.
+	 * @return string The menu item slug.
 	 */
-	public function set_current_menu_item( ?string $file ): ?string {
+	public function set_current_menu_item( $file ): string {
+		$file   = '';
 		$screen = \get_current_screen();
 		$this->get_routes( 'admin' );
 		foreach ( $this->routes['get'] as $key => $route ) {

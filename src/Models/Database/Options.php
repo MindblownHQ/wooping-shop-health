@@ -64,8 +64,8 @@ class Options {
 	public function version_number() {
 		$options = \get_option( self::$group_name );
 
-		if( ! isset( $options['version'] ) ) {
-			$options['version'] = SHOP_HEALTH_VERSION;
+		if ( ! isset( $options['version'] ) ) {
+			$options['version'] = \SHOP_HEALTH_VERSION;
 			\update_option( self::$group_name, $options );
 		}
 
@@ -73,13 +73,13 @@ class Options {
 	}
 
 	public static function get( $key ) {
-		$options = get_option( self::$group_name );
+		$options = \get_option( self::$group_name );
 
 		return $options[ $key ] ?? false;
 	}
 
 	public static function set( $key, $value ) {
-		$options = get_option( self::$group_name );
+		$options = \get_option( self::$group_name );
 
 		$options[ $key ] = $value;
 

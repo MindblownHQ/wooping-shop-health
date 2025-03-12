@@ -95,10 +95,10 @@ class ScannedObject extends Model {
 
 		$score = ( new ScoreCalculator() )->scanned_object( $this );
 
-		// For a product, get the relative score based on the max_score
-		if ( $this->object_type == 'product' ) {
+		// For a product, get the relative score based on the max_score.
+		if ( $this->object_type === 'product' ) {
 
-			// get total negatives, and calculate our total score against it
+			// Get total negatives, and calculate our total score against it.
 			$max_scores      = \get_option( 'wooping_shop_health_max_scores', [] );
 			$total_negatives = ( $max_scores['products'] ?? 1000 );
 			$score           = ( $score / $total_negatives * 100 ); // percentage.

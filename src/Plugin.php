@@ -81,7 +81,7 @@ class Plugin {
 	 */
 	public function init(): void {
 
-		// Check if updates should be run
+		// Check if updates should be run.
 		if ( \version_compare( Options::get( 'version' ), \SHOP_HEALTH_VERSION, '<' ) ) {
 			( new Routines() )->run_updates();
 		}
@@ -126,10 +126,10 @@ class Plugin {
 	public function boot(): void {
 		$capsule = new Capsule();
 
-		// Retrieve the default port
+		// Retrieve the default port.
 		$default_port = \ini_get( 'mysqli.default_port' );
 
-		// Overwrite default port when it's set in DB_HOST
+		// Overwrite default port when it's set in DB_HOST.
 		if ( \strpos( \DB_HOST, ':' ) !== false ) {
 			[ , $default_port ] = \explode( ':', \DB_HOST );
 		}

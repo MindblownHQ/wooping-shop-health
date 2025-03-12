@@ -41,7 +41,7 @@ class Settings extends Controller {
 		if ( isset( $_POST['ignored_validators'] ) && \is_array( $_POST['ignored_validators'] ) ) { // phpcs:ignore
 
 			// get the old ignored validators.
-			$old_ignored_validators = Options::get( 'ignored_validators' ) ?? [];
+			$old_ignored_validators = ( Options::get( 'ignored_validators' ) ?? [] );
 
 			// sanitize value. ignored_validators are sanitized, but as text.
 			$validators = [];

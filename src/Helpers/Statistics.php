@@ -58,7 +58,7 @@ class Statistics {
 				'text'       => ( ( $returning['diff'] > 0 ) ? '+' : '' ) . $returning['diff'],
 				'addendum'   => ( $returning['diff'] >= 0 ) ? \__( 'increase', 'wooping-shop-health' ) : \__( 'decrease', 'wooping-shop-health' ),
 				'diff'       => $returning['diff'],
-				'total'      => \round($data['returning_customers'], 2),
+				'total'      => \round( $data['returning_customers'], 2 ),
 				'id'         => 'returning',
 			],
 			'revenue'   => [
@@ -172,7 +172,7 @@ class Statistics {
 	}
 
 	/**
-	 * calculate diff in number and percentage
+	 * Calculate diff in number and percentage
 	 *
 	 * @return array <int|float>
 	 */
@@ -182,7 +182,7 @@ class Statistics {
 
 		if ( $old_value <= 0 ) {
 			$percentage = 100;
-		}elseif ( $diff == 0 ) {
+		}elseif ( $diff === 0 ) {
 			$percentage = 0;
 		}else {
 			$percentage = \round( ( ( $diff / $old_value ) * 100 ), 2 );
