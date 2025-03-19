@@ -26,7 +26,7 @@ class Settings extends Controller {
 		foreach ( $keys as $key ) {
 
 			// also, grab the default out of the defaults array if nothing is set.
-			$settings[ $key ] = \get_option( 'wooping_shop_health_' . $key, $defaults[ $key ] );
+			$settings[ $key ] = Options::get( 'ignored_validators' ) ?? $defaults[ $key ];
 		}
 
 		// render the view.
