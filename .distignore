@@ -42,3 +42,4 @@ node_modules
 *.tar.gz
 *.zip
 .config
+dev.php

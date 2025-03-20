@@ -63,6 +63,7 @@ jobs:
           -x "${{ github.event.repository.name }}/.travis.yml" \
           -x "${{ github.event.repository.name }}/.config" \
           -x "${{ github.event.repository.name }}/webpack.mix.js"
+          -x "${{ github.event.repository.name }}/dev.php"
 
       - name: Release
         uses: softprops/action-gh-release@v1
