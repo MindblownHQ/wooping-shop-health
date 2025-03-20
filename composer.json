@@ -20,6 +20,9 @@
       "src/routes.php"
     ]
   },
+  "autoload-dev": {
+    "files": ["dev.php"]
+  },
   "require": {
     "php": ">=7.4",
     "illuminate/collections": "^8.83",
