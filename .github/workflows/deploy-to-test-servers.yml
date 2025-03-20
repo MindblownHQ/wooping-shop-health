@@ -1,0 +1,49 @@
+name: Deploy to Test servers
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+
+    # Dynamically set environment based on branch
+    environment:
+      name: ${{ github.ref_name == 'main' && 'stable' || 'dev' }}
+
+    steps:
+    # Checkout the code
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Set up SSH agent with the private key
+    - name: Set up SSH Agent
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    # Deploy via SSH
+    - name: Deploy to Server
+      env:
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+        SSH_USER: ${{ vars.SSH_USER }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST << 'EOF'
+          set -e
+          # Navigate to project directory
+          cd /sites/stable.etude.wooping.io/files/wp-content/plugins/wooping-shop-health
+          
+          # Pull changes from the appropriate branch
+          git pull origin ${{ github.ref_name }}
+          
+          # Install PHP dependencies
+          composer install --no-dev --optimize-autoloader
+          
+          # Install and build frontend assets
+          npm ci
+          npm run production
+        EOF
